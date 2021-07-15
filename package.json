@@ -1,6 +1,6 @@
 {
 	"name": "@igor.dvlpr/vscode-folderpicker",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "Provides a custom Folder Picker API + UI for Visual Studio Code.",
 	"main": "index.js",
 	"files": [
