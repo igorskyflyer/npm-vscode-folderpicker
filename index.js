@@ -1,11 +1,14 @@
-const vscode = require('vscode')
 const { resolve, join, isAbsolute } = require('path')
-const { readDirSync, Entry, Depth } = require('@igor.dvlpr/recursive-readdir')
-const { u } = require('@igor.dvlpr/upath')
 const { accessSync, realpathSync } = require('fs')
 const { homedir } = require('os')
+
+const vscode = require('vscode')
+
+const { readDirSync, Entry, Depth } = require('@igor.dvlpr/recursive-readdir')
+const { u } = require('@igor.dvlpr/upath')
 const { pathExists } = require('@igor.dvlpr/pathexists')
 const { isRootDirectory } = require('@igor.dvlpr/is-rootdir')
+const Zep = require('@igor.dvlpr/zep')
 
 /* 🦎 Developed using Gecko 🦎 */
 
@@ -51,17 +54,32 @@ const { isRootDirectory } = require('@igor.dvlpr/is-rootdir')
  */
 
 /**
+ * @enum {number}
+ */
+const ResponseSpeed = {
+  Fast: 0,
+  Normal: 600,
+  Lazy: 1700,
+}
+
+/**
  * @typedef FolderPickerOptions
- * @property {string} [dialogTitle='']
- * @property {string} [folderIcon='']
- * @property {string} [upFolderIcon='']
+ * @property {string} [dialogTitle='Pick a Folder']
+ * @property {boolean} [showIcons=true]
+ * @property {string|vscode.ThemeIcon} [iconFolder='']
+ * @property {string|vscode.ThemeIcon} [iconFolderUp='']
+ * @property {string|vscode.ThemeIcon} [iconCreate='']
+ * @property {string|vscode.ThemeIcon} [iconNavigate='']
+ * @property {string|vscode.ThemeIcon} [iconPick='']
+ * @property {ResponseSpeed} [responseSpeed=ResponseSpeed.Normal]
  * @property {boolean} [ignoreFocusOut=true]
- * @property {NewFolderActionCallback} [onNewFolder]
+ * @property {NewFolderActionCallback} [onCreateFolder]
  * @property {ActionCallback} [onNavigateTo]
  * @property {ActionCallback} [onGoUp]
  * @property {PickFolderActionCallback} [onPickFolder]
  * @property {ErrorCallback} [onError]
  * @property {SimpleActionCallback} [onClose]
+ * @property {SimpleActionCallback} [onConfigButton]
  * @property {FetchCallback} [onFetch]
  * @property {UnspecifiedActionCallback} [onUnspecifiedAction]
  */
@@ -80,10 +98,27 @@ const Action = {
 }
 
 /**
+ * Resolves a ThemeIcon.
+ * @param {string|vscode.ThemeIcon} icon
+ * @returns {string}
+ */
+function resolveIcon(icon) {
+  if (!icon) {
+    return ''
+  }
+
+  if (typeof icon === 'string' || !icon.id) {
+    return icon
+  }
+
+  return `$(${icon.id})`
+}
+
+/**
  * Adds an icon to the given label.
  * @private
  * @param {string} label
- * @param {string} icon
+ * @param {string|vscode.ThemeIcon} icon
  * @returns {string}
  */
 function iconify(label, icon) {
@@ -130,18 +165,18 @@ function getDirectories(path, options) {
 function getDirectoryItems(entries, options) {
   return entries.map((entry) => {
     if (entry === '.') {
-      return getPickCurrentAction()
+      return getPickCurrentAction(options.iconPick)
     }
     if (entry === '..') {
       return {
-        label: iconify(entry, options.upFolderIcon),
+        label: iconify(entry, options.iconFolderUp),
         description: 'parent folder',
         action: Action.ParentFolder,
         path: '..',
       }
     } else {
       return {
-        label: iconify(entry, options.folderIcon),
+        label: iconify(entry, options.iconFolder),
         description: 'folder',
         action: Action.ChildFolder,
         path: entry,
@@ -173,9 +208,25 @@ function canAccess(path) {
 // prettier-ignore
 function fillOptions(options) {
   	options.dialogTitle = options.dialogTitle || 'Pick a Folder'
+  	options.showIcons = options.showIcons || true
   	options.ignoreFocusOut = options.ignoreFocusOut || false
-  	options.folderIcon = options.folderIcon || '$(folder)'
-  	options.upFolderIcon = options.upFolderIcon || '$(folder-opened)'
+
+		if(options.showIcons) {
+			options.iconFolder = resolveIcon(options.iconFolder) || '$(folder)'
+			options.iconFolderUp = resolveIcon(options.iconFolderUp) || '$(folder-opened)'
+			options.iconCreate = resolveIcon(options.iconCreate) || '$(new-folder)'
+			options.iconNavigate = resolveIcon(options.iconNavigate) || '$(chevron-right)'
+			options.iconPick = resolveIcon(options.iconPick) || '$(check)'
+		} else {
+			options.iconFolder = ''
+			options.iconFolderUp = ''
+			options.iconCreate = ''
+			options.iconNavigate = ''
+			options.iconPick = ''
+		}
+
+		// allows passing of ResponseSpeed.Fast = 0
+		options.responseSpeed = options.responseSpeed == undefined ? ResponseSpeed.Normal : options.responseSpeed
 
   return options
 }
@@ -183,21 +234,28 @@ function fillOptions(options) {
 /**
  *
  * @param {string} path
+ * @param {string} description
+ * @param {string|vscode.ThemeIcon} icon
  * @returns {vscode.QuickPickItem}
  */
-function getCreateAction(path, description) {
+function getCreateAction(path, description, icon) {
   return {
-    label: '✨',
+    label: `${resolveIcon(icon)} ${path}`,
     description,
     path,
-    alwaysShow: true,
     action: Action.CreateFolder,
   }
 }
 
-function getNavigateAction(path) {
+/**
+ *
+ * @param {string} path
+ * @param {string|vscode.ThemeIcon} icon
+ * @returns
+ */
+function getNavigateAction(path, icon) {
   return {
-    label: '🚶‍♂️',
+    label: resolveIcon(icon),
     path,
     description: `Navigate to ${path}`,
     alwaysShow: true,
@@ -205,9 +263,12 @@ function getNavigateAction(path) {
   }
 }
 
-function getPickCurrentAction() {
+/**
+ * @param {string|vscode.ThemeIcon} icon
+ */
+function getPickCurrentAction(icon) {
   return {
-    label: '🆗',
+    label: resolveIcon(icon),
     description: 'Pick current folder',
     action: Action.PickFolder,
     path: '.',
@@ -226,14 +287,77 @@ function showFolderPicker(directory, options) {
     options = fillOptions(options || {})
 
     const picker = vscode.window.createQuickPick()
-    picker.placeholder = `Name of folder to create in ${resolve(directory)}`
+    const resolvedDirectory = resolve(directory)
+
+    picker.placeholder = resolvedDirectory
     picker.title = options.dialogTitle
     picker.ignoreFocusOut = options.ignoreFocusOut
     picker.canSelectMany = false
+    picker.buttons = [
+      { iconPath: new vscode.ThemeIcon('gear'), tooltip: 'Configure...' },
+    ]
 
-    let currentPath = resolve(directory)
+    let currentPath = resolvedDirectory
     let entries = getDirectories(currentPath, options)
     let items = getDirectoryItems(entries, options)
+    const zepActions = new Zep((e) => {
+      if (e.length > 0) {
+        // ah, path-safety 😌
+        let folderPath = u(e)
+
+        if (!pathExists(folderPath, entries)) {
+          const actions = []
+
+          // run through uPath again,
+          // this time add a trailing slash,
+          // allows us to catch things like
+          // D: on Windows
+          let absolutePath = u(folderPath, true)
+
+          if (isAbsolute(absolutePath)) {
+            if (!canAccess(absolutePath)) {
+              actions.unshift(
+                getCreateAction(
+                  folderPath,
+                  `Create "${folderPath}"`,
+                  options.iconCreate
+                )
+              )
+            } else {
+              // fixes an issue with non-proper path case
+              absolutePath = realpathSync.native(absolutePath)
+              picker.placeholder = absolutePath
+              actions.unshift(
+                getNavigateAction(absolutePath, options.iconNavigate)
+              )
+            }
+          } else {
+            actions.unshift(
+              getCreateAction(
+                folderPath,
+                `Create in ${currentPath}`,
+                options.iconCreate
+              )
+            )
+          }
+
+          picker.items = [...actions, ...items]
+        } else {
+          picker.items = items
+        }
+      } else {
+        picker.placeholder = ''
+        picker.items = items
+      }
+    }, options.responseSpeed)
+
+    zepActions.onBeforeRun = () => {
+      picker.busy = true
+    }
+
+    zepActions.onAfterRun = () => {
+      picker.busy = false
+    }
 
     picker.items = items
 
@@ -246,52 +370,17 @@ function showFolderPicker(directory, options) {
       }
     })
 
+    picker.onDidTriggerButton((e) => {
+      if (typeof options.onConfigButton === 'function') {
+        if (e.tooltip === 'Configure...') {
+          options.onConfigButton()
+        }
+      }
+    })
+
     picker.onDidChangeValue((e) => {
       try {
-        if (e.length > 0) {
-          // ah, path-safety 😌
-          let folderPath = u(e)
-
-          // very useful,
-          // but it is buggy 😔
-          // picker.value = folderPath
-
-          if (!pathExists(folderPath, entries)) {
-            const actions = []
-
-            // run through uPath again,
-            // this time add a trailing slash,
-            // allows us to catch things like
-            // D: on Windows
-            let absolutePath = u(folderPath, true)
-
-            if (isAbsolute(absolutePath)) {
-              if (!canAccess(absolutePath)) {
-                actions.unshift(
-                  getCreateAction(folderPath, `Create ${folderPath}`)
-                )
-              } else {
-                // fixes an issue with non-proper path case
-                absolutePath = realpathSync.native(absolutePath)
-                picker.placeholder = absolutePath
-                actions.unshift(getNavigateAction(absolutePath))
-              }
-            } else {
-              actions.unshift(
-                getCreateAction(
-                  folderPath,
-                  `Create ${folderPath} folder in ${currentPath}`
-                )
-              )
-            }
-
-            picker.items = [...actions, ...items]
-          } else {
-            picker.items = items
-          }
-        } else {
-          picker.items = items
-        }
+        zepActions.run(e)
       } catch (exp) {
         if (typeof options.onError === 'function') {
           options.onError(exp)
@@ -323,23 +412,24 @@ function showFolderPicker(directory, options) {
 
         // we have canSelectMany disabled
         const item = picker.activeItems[0]
+        const action = item.action
 
-        if (item.action === Action.ChildFolder) {
+        if (action === Action.ChildFolder) {
           currentPath = resolve(join(currentPath, item.path))
-        } else if (item.action === Action.ParentFolder) {
+        } else if (action === Action.ParentFolder) {
           currentPath = resolve(join(currentPath, item.path))
 
           if (typeof options.onGoUp === 'function') {
             options.onGoUp(currentPath, picker)
           }
-        } else if (item.action === Action.Navigate && isAbsolute(item.path)) {
+        } else if (action === Action.Navigate && isAbsolute(item.path)) {
           currentPath = item.path
 
           if (typeof options.onNavigateTo === 'function') {
             options.onNavigateTo(currentPath, picker)
           }
-        } else if (item.action === Action.CreateFolder) {
-          if (typeof options.onNewFolder === 'function') {
+        } else if (action === Action.CreateFolder) {
+          if (typeof options.onCreateFolder === 'function') {
             let newFolderPath
 
             if (isAbsolute(item.path)) {
@@ -348,29 +438,32 @@ function showFolderPicker(directory, options) {
               newFolderPath = resolve(join(currentPath, item.path))
             }
 
-            options.onNewFolder(newFolderPath)
+            options.onCreateFolder(newFolderPath)
             picker.hide()
           }
 
           // stop execution here
           return
-        } else if (item.action === Action.PickFolder) {
+        } else if (action === Action.PickFolder) {
           if (typeof options.onPickFolder === 'function') {
             options.onPickFolder(currentPath)
-          } else {
-            if (typeof options.onUnspecifiedAction === 'function') {
-              options.onUnspecifiedAction(picker)
-            }
+          }
+
+          picker.hide()
+          return
+        } else {
+          if (typeof options.onUnspecifiedAction === 'function') {
+            options.onUnspecifiedAction(picker)
           }
 
           picker.hide()
           return
         }
 
+        picker.value = ''
         entries = getDirectories(currentPath, options)
         items = getDirectoryItems(entries, options)
         picker.items = items
-        picker.value = ''
       } catch (exp) {
         if (typeof options.onError === 'function') {
           options.onError(exp)
@@ -389,4 +482,5 @@ function showFolderPicker(directory, options) {
 // here 👇 you should export VS Code dependent API
 module.exports = {
   showFolderPicker,
+  ResponseSpeed,
 }
