@@ -12,7 +12,8 @@
 
 <br>
 
-> 📢 Future releases might contain **breaking** changes!
+> 📢 Future releases will contain **breaking** changes!
+> ✨ Current `v.2.0.0` contains breaking changes.
 
 <br>
 <br>
@@ -48,7 +49,23 @@ npm i "@igor.dvlpr/vscode-folderpicker"
 
 ### API
 
-```js
+<br>
+
+<a id="folder-picker-responsespeed"></a>
+
+```ts
+enum ResponseSpeed
+```
+
+Used for controlling the response speed of the `InputBox` of the `QuickPick`. Since `v.2.0.0` callbacks for generating Actions are throttled/debounced when necessary and the picker now waits for the user to finish their input before generating available Actions for performance reasons.
+
+Available values are: `Fast`, `Normal` (default), `Lazy`.
+
+Note: setting the property `responseSpeed` in the `options` parameter of `showFolderPicker()` to `Fast` will disable throttling!
+
+<br>
+
+```ts
 showFolderPicker(directory: string, options?: FolderPickerOptions): void
 ```
 
@@ -61,29 +78,41 @@ Available properties/callbacks:
 
 `FolderPickerOptions`
 
-- **`dialogTitle`**: **string** - the Folder Picker title, shown at the top of the picker,
+- **`[dialogTitle]`**: **string** = **'Pick a Folder'** - the Folder Picker title, shown at the top of the picker,
 
-- **`folderIcon`**: **string** - _icon_ to use for folder entries. Be aware that the term _icon_ is used here as a descriptive one, this property expects a **single** emoji or a **single** Codicon which is a string as well, to see the list of available Codicons, look at the official Visual Studio Code documentation, **[here](https://code.visualstudio.com/api/references/icons-in-labels#icon-listing)**. Unexpected things may happen if you provide something else,
+- **`[showIcons]`**: **boolean** = **true** - indicates whether icons will be shown in the Folder Picker. When this property is set to `false` all/any icons you set will be ignored,
 
-- **`upFolderIcon`**: **string** - _icon_ to use for folder entries. Be aware that the term _icon_ is used here as a descriptive one, this property expects a **single** emoji or a **single** Codicon which is a string as well, to see the list of available Codicons, look at the official Visual Studio Code documentation, **[here](https://code.visualstudio.com/api/references/icons-in-labels#icon-listing)**. Unexpected things may happen if you provide something else,
+Icons - grouped together for brevity
 
-- **`ignoreFocusOut`**: **boolean** - whether the UI should stay open even when loosing UI focus. Defaults to **true**,
+- **`[iconFolder]`**: **string** = '' - _icon_ to use for folder entries,
+- **`[iconFolderUp]`**: **string** = '' - _icon_ to use for the folder up entry,
+- **`[iconCreate]`**: **string** = '' - _icon_ to use for `Create folder` Action,
+- **`[iconNavigate]`**: **string** = '' - _icon_ to use for `Navigate to...` Action,
+- **`[iconPick]`**: **string** = '' - _icon_ to use for `Pick current directory` Action.
 
-- **`onNewFolder`**: **(folderPath: string) => void** - called when the New Folder action is triggered, here you should put your logic for folder creation,
+Be aware that the term _icon_ is used here as a descriptive one, this property expects a **single** emoji or a **single** `ThemeIcon` which is a string as well, to see the list of available ThemeIcons, look at the official Visual Studio Code documentation, **[here](https://code.visualstudio.com/api/references/icons-in-labels#icon-listing)**,
 
-- **`onNavigateTo`**: **(folderPath: string, ui: vscode.QuickPick) => void** - called when the user is navigating to an arbitrary absolute path.
+- **`[responseSpeed]`**: **ResponseSpeed** = **ResponseSpeed.Normal** - used for controlling the response speed of the `InputBox` of the `QuickPick`. See [ResponseSpeed](#folder-picker-responsespeed),
 
-- **`onGoUp`**: **(folderPath: string, ui: vscode.QuickPick) => void** - called when the user has clicked on the parent folder entry, that navigates one folder up the directory tree.
+- **`[ignoreFocusOut]`**: **boolean** = **true** - whether the UI should stay open even when loosing UI focus. Defaults to **true**,
 
-- **`onPickFolder`**: **(folderPath: string) => void** - called when the user has picked a folder.
+- **`[onCreateFolder]`**: **(folderPath: string) => void** - called when the New Folder action is triggered, here you should put your logic for folder creation,
 
-- **`onError`**: **(error: Error) => void** - called when an error has occurred.
+- **`[onNavigateTo]`**: **(folderPath: string, ui: vscode.QuickPick) => void** - called when the user is navigating to an arbitrary absolute path.
 
-- **`onClose`**: **() => void** - called when the user has closed the picker, either by picking a folder, creating a new one, removed focus from the UI - if applicable - `ignoreFocusOut = false`, or pressing `Esc`.
+- **`[onGoUp]`**: **(folderPath: string, ui: vscode.QuickPick) => void** - called when the user has clicked on the parent folder entry, that navigates one folder up the directory tree.
 
-- **`onFetch`**: **() => void** - called before the picker fetches directory entries. Most likely this callback will be **removed**.
+- **`[onPickFolder]`**: **(folderPath: string) => void** - called when the user has picked a folder.
 
-- **`onUnspecifiedAction`**: **(ui: vscode.QuickPick) => void** - called when there is no action specified. This callback might be triggered in some rare cases - might be removed.
+- **`[onError]`**: **(error: Error) => void** - called when an error has occurred.
+
+- **`[onClose]`**: **() => void** - called when the user has closed the picker, either by picking a folder, creating a new one, removed focus from the UI - if applicable - `ignoreFocusOut = false`, or pressing `Esc`.
+
+- **`[onConfigButton]`**: **() => void** - since `v.2.0.0` a Config button is shown at the top right corner of the UI. This callback will be invoked when clicking on it.
+
+- **`[onFetch]`**: **() => void** - called before the picker fetches directory entries. Most likely this callback will be **removed**.
+
+- **`[onUnspecifiedAction]`**: **(ui: vscode.QuickPick) => void** - called when there is no action specified. This callback might be triggered in some rare cases - might be removed.
 
 <br>
 <br>
@@ -96,8 +125,8 @@ then call it inside your extension's code,
 // some magic code 🔮
 
 showFolderPicker(directory, {
-  folderIcon: '⚡',
-  upFolderIcon: '🔼',
+  iconFolder: '⚡',
+  iconFolderUp: ['🔼',
   ignoreFocusOut: true,
 })
 
