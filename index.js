@@ -208,7 +208,7 @@ function canAccess(path) {
 // prettier-ignore
 function fillOptions(options) {
   	options.dialogTitle = options.dialogTitle || 'Pick a Folder'
-  	options.showIcons = options.showIcons || true
+  	options.showIcons = options.showIcons == false ? false : true
   	options.ignoreFocusOut = options.ignoreFocusOut || false
 
 		if(options.showIcons) {
@@ -372,6 +372,8 @@ function showFolderPicker(directory, options) {
 
     picker.onDidTriggerButton((e) => {
       if (typeof options.onConfigButton === 'function') {
+        picker.hide()
+
         if (e.tooltip === 'Configure...') {
           options.onConfigButton()
         }
