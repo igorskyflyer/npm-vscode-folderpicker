@@ -13,6 +13,7 @@
 <br>
 
 > 📢 Future releases will contain **breaking** changes!
+
 > ✨ Current `v.2.0.0` contains breaking changes.
 
 <br>
