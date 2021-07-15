@@ -125,9 +125,36 @@ then call it inside your extension's code,
 
 showFolderPicker(directory, {
   iconFolder: '⚡',
-  iconFolderUp: ['🔼',
+  iconFolderUp: '🔼',
   ignoreFocusOut: true,
 })
 
 // even more magic code ✨
 ```
+
+<br>
+
+### Demo
+
+<p align="center">
+	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/explorer-command.gif" alt="Explorer View">
+	<sub>Explorer View command</sub>
+</p>
+
+<br>
+<br>
+
+<p align="center">
+	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-create.gif" alt="Command Palette New Folder">
+	<sub>Command palette command to create a folder in current directory</sub>
+</p>
+
+<br>
+<br>
+
+<p align="center">
+	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-navigate.gif" alt="Command Palette New Folder">
+	<sub>Command Palette navigate to folder and recursive directories create</sub>
+</p>
+
+<br>
