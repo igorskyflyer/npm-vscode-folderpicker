@@ -9,6 +9,7 @@
 <br>
 
 > ⚠ This module is built as the core functionality of my **[New Folder](https://github.com/igorskyflyer/vscode-new-folder)** Visual Studio Code extension and is still under active development, use at own risk, if needed.
+> Uses 🧠[`Zep()`](https://github.com/igorskyflyer/npm-zep)⏰.
 
 <br>
 
