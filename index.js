@@ -57,7 +57,8 @@ const Zep = require('@igor.dvlpr/zep')
  * @enum {number}
  */
 const ResponseSpeed = {
-  Fast: 0,
+  Instant: 0,
+  Fast: 150,
   Normal: 600,
   Lazy: 1700,
 }
