@@ -30,7 +30,7 @@
 		"@igor.dvlpr/pathexists": "^1.0.0",
 		"@igor.dvlpr/recursive-readdir": "^1.1.0",
 		"@igor.dvlpr/upath": "^1.2.0",
-		"@igor.dvlpr/zep": "^2.0.0"
+		"@igor.dvlpr/zep": "^3.0.0"
 	},
 	"devDependencies": {
 		"@types/node": "^16.3.1",
