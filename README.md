@@ -9,11 +9,10 @@
 <br>
 
 > ⚠ This module is built as the core functionality of my **[New Folder](https://github.com/igorskyflyer/vscode-new-folder)** Visual Studio Code extension and is still under active development, use at own risk, if needed.
-> Uses 🧠[`Zep()`](https://github.com/igorskyflyer/npm-zep)⏰.
 
 <br>
 
-> ✨ Current version `v.2.0.0` contains breaking changes.
+> ✨ Current major version `v.2.x.x` contains breaking changes.
 
 <br>
 <br>
@@ -57,11 +56,11 @@ npm i "@igor.dvlpr/vscode-folderpicker"
 enum ResponseSpeed
 ```
 
-Used for controlling the response speed of the `InputBox` of the `QuickPick`. Since `v.2.0.0` callbacks for generating Actions are throttled/debounced when necessary and the picker now waits for the user to finish their input before generating available Actions for performance reasons.
+Used for controlling the response speed of the `InputBox` of the `QuickPick`. Since `v.2.0.0` callbacks for generating Actions are throttled/debounced when necessary and the picker now waits for the user to finish their input before generating available Actions for performance reasons. Throttling provided by [`Zep()`](https://www.npmjs.com/package/@igor.dvlpr/zep).
 
-Available values are: `Fast`, `Normal` (default), `Lazy`.
+Available values are: `Instant`, `Fast`, `Normal` (default), `Lazy`.
 
-Note: setting the property `responseSpeed` in the `options` parameter of `showFolderPicker()` to `Fast` will disable throttling!
+Note: setting the property `responseSpeed` in the `options` parameter of `showFolderPicker()` to `Instant` will disable throttling!
 
 <br>
 
