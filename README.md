@@ -88,12 +88,15 @@ Icons - grouped together for brevity
 - **`[iconCreate]`**: **string** = '' - _icon_ to use for `Create folder` Action,
 - **`[iconNavigate]`**: **string** = '' - _icon_ to use for `Navigate to...` Action,
 - **`[iconPick]`**: **string** = '' - _icon_ to use for `Pick current directory` Action.
+- **`[iconClear]`**: **string** = '' - _icon_ to use for `Clear` Action, available when the folder name is not valid.
 
 Be aware that the term _icon_ is used here as a descriptive one, this property expects a **single** emoji or a **single** `ThemeIcon` which is a string as well, to see the list of available ThemeIcons, look at the official Visual Studio Code documentation, **[here](https://code.visualstudio.com/api/references/icons-in-labels#icon-listing)**,
 
 - **`[responseSpeed]`**: **ResponseSpeed** = **ResponseSpeed.Normal** - used for controlling the response speed of the `InputBox` of the `QuickPick`. See [ResponseSpeed](#folder-picker-responsespeed),
 
 - **`[ignoreFocusOut]`**: **boolean** = **true** - whether the UI should stay open even when loosing UI focus. Defaults to **true**,
+
+- **`[showConfigButton]`**: **boolean** = **false** - whether to show a Config button in the top-right corner of the Picker. Defaults to **false**,
 
 - **`[onCreateFolder]`**: **(folderPath: string) => void** - called when the New Folder action is triggered, here you should put your logic for folder creation,
 
