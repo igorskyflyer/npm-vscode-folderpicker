@@ -1,11 +1,16 @@
 {
 	"include": [
-		"./*.js"
+		"./src/*.js"
 	],
 	"compilerOptions": {
 		"allowJs": true,
 		"declaration": true,
 		"emitDeclarationOnly": true,
-		"outDir": "dist"
+		"outDir": "dist",
+		"alwaysStrict": true,
+		"listEmittedFiles": true,
+		"noUnusedParameters": true,
+		"noUnusedLocals": true,
+		"pretty": true,
 	}
 }
