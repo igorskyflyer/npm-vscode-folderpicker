@@ -1,15 +1,15 @@
 {
 	"name": "@igor.dvlpr/vscode-folderpicker",
-	"version": "2.0.2",
-	"description": "Provides a custom Folder Picker API + UI for Visual Studio Code.",
-	"main": "index.js",
+	"version": "2.1.0",
+	"description": "✨ Provides a custom Folder Picker API + UI for Visual Studio Code. 🎨",
+	"main": "src/folder-picker.js",
 	"files": [
-		"index.js",
+		"src/",
 		"dist/"
 	],
-	"types": "./dist/index.d.ts",
+	"types": "./dist/folder-picker.d.ts",
 	"scripts": {
-		"party": "tsc && npm publish --access public"
+		"pub": "tsc && npm publish --access public"
 	},
 	"repository": {
 		"type": "git",
@@ -30,7 +30,8 @@
 		"@igor.dvlpr/pathexists": "^1.0.0",
 		"@igor.dvlpr/recursive-readdir": "^1.1.0",
 		"@igor.dvlpr/upath": "^1.2.0",
-		"@igor.dvlpr/zep": "^3.0.0"
+		"@igor.dvlpr/valid-path": "^1.0.1",
+		"@igor.dvlpr/zep": "^4.0.0"
 	},
 	"devDependencies": {
 		"@types/node": "^16.3.1",
