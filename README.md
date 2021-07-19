@@ -140,14 +140,6 @@ showFolderPicker(directory, {
 ### Demo
 
 <p align="center">
-	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/explorer-command.gif" alt="Explorer View">
-	<sub>Explorer View command</sub>
-</p>
-
-<br>
-<br>
-
-<p align="center">
 	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-create.gif" alt="Command Palette New Folder">
 	<sub>Command palette command to create a folder in current directory</sub>
 </p>
