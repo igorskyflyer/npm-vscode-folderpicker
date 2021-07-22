@@ -139,17 +139,65 @@ showFolderPicker(directory, {
 
 ### Demo
 
+#### Actions
+
+<br>
+
+##### 🎯 Create
+
 <p align="center">
-	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-create.gif" alt="Command Palette New Folder">
-	<sub>Command palette command to create a folder in current directory</sub>
+	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-create-relative.gif" alt="Command Palette: New Relative Folder">
+	<sub>Command palette command to create a folder in the current directory</sub>
 </p>
 
 <br>
 <br>
 
 <p align="center">
-	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-navigate.gif" alt="Command Palette New Folder">
-	<sub>Command Palette navigate to folder and recursive directories create</sub>
+  <img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-create-absolute.gif" alt="Command Palette: New Absolute Folder">
+    <sub>Command palette command to create a folder with an absolute path</sub>
+</p>
+
+<br>
+<br>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-recursive-folder.gif" alt="Command Palette: New Recursive Folder">
+    <sub>Command palette command to create folders recursively in the current folder</sub>
+</p>
+
+<br>
+<br>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-invalid-folder.gif" alt="Command Palette: Invalid Folder">
+    <sub>Invalid folder name supplied</sub>
+</p>
+
+<br>
+<br>
+
+##### 🎯 Navigate
+
+<p align="center">
+	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-navigate-relative.gif" alt="Command Palette: Navigate to Relative Folder">
+	<sub>Navigation to relative-path folders</sub>
+</p>
+
+<br>
+<br>
+
+<p align="center">
+	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-navigate-absolute.gif" alt="Command Palette: Navigate to Absolute Folder">
+	<sub>Navigation to absolute-path folders</sub>
+</p>
+
+<br>
+<br>
+
+<p align="center">
+	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-pick-folder.gif" alt="Command Palette: Pick Folder">
+	<sub>Pick a Folder</sub>
 </p>
 
 <br>
