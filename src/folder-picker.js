@@ -311,6 +311,7 @@ function showFolderPicker(directory, options) {
     }
 
     const resolvedDirectory = resolve(directory)
+    const clearAction = [getClearInputAction('Invalid folder name', options.iconClear)]
     let currentPath = resolvedDirectory
     let entries = getDirectories(currentPath, options)
     let items = getDirectoryItems(entries, options)
@@ -335,8 +336,6 @@ function showFolderPicker(directory, options) {
     }
 
     const zepActions = new Zep((self, e) => {
-      picker.busy = true
-
       // ah, path-safety 😌
       let folderPath = u(e)
 
@@ -362,7 +361,8 @@ function showFolderPicker(directory, options) {
           if (isValidPath(folderPath, false)) {
             actions.unshift(getCreateAction(folderPath, `Create in ${currentPath}`, options.iconCreate))
           } else {
-            picker.items = [getClearInputAction('Invalid folder name', options.iconClear)]
+            picker.items = clearAction
+            picker.busy = false
             return
           }
         }
@@ -414,8 +414,11 @@ function showFolderPicker(directory, options) {
     })
 
     picker.onDidChangeValue((e) => {
+      picker.busy = true
+
       if (!e) {
         picker.items = items
+        picker.busy = false
       } else {
         zepActions.run(e)
       }
