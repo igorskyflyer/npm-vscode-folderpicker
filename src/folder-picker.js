@@ -314,10 +314,10 @@ function showFolderPicker(directory, options) {
     let entries = getDirectories(currentPath, options)
     let items = getDirectoryItems(entries, options)
 
-    picker.placeholder = resolvedDirectory
     picker.title = options.dialogTitle
     picker.ignoreFocusOut = options.ignoreFocusOut
     picker.canSelectMany = false
+    picker.items = items
 
     if (options.showConfigButton) {
       picker.buttons = [{ iconPath: new vscode.ThemeIcon('gear'), tooltip: 'Configure...' }]
@@ -334,54 +334,45 @@ function showFolderPicker(directory, options) {
     }
 
     const zepActions = new Zep((self, e) => {
-      if (e.length > 0) {
-        // ah, path-safety 😌
-        let folderPath = u(e)
+      picker.busy = true
 
-        if (!pathExists(folderPath, entries)) {
-          const actions = []
+      // ah, path-safety 😌
+      let folderPath = u(e)
 
-          // run through uPath again,
-          // this time add a trailing slash,
-          // allows us to catch things like
-          // D: on Windows
-          let absolutePath = u(folderPath, true)
+      if (!pathExists(folderPath, entries)) {
+        const actions = []
 
-          if (isAbsolute(absolutePath)) {
-            if (!canAccess(absolutePath)) {
-              actions.unshift(getCreateAction(folderPath, `Create "${folderPath}"`, options.iconCreate))
-            } else {
-              // fixes an issue with non-proper path case
-              absolutePath = realpathSync.native(absolutePath)
-              picker.placeholder = absolutePath
-              actions.unshift(getNavigateAction(absolutePath, options.iconNavigate))
-            }
+        // run through uPath again,
+        // this time add a trailing slash,
+        // allows us to catch things like
+        // D: on Windows
+        let absolutePath = u(folderPath, true)
+
+        if (isAbsolute(absolutePath)) {
+          if (!canAccess(absolutePath)) {
+            actions.unshift(getCreateAction(folderPath, `Create "${folderPath}"`, options.iconCreate))
           } else {
-            if (isValidPath(folderPath, false)) {
-              actions.unshift(getCreateAction(folderPath, `Create in ${currentPath}`, options.iconCreate))
-            } else {
-              picker.items = [getClearInputAction('Invalid folder name', options.iconClear)]
-              return
-            }
+            // fixes an issue with non-proper path case
+            absolutePath = realpathSync.native(absolutePath)
+            picker.placeholder = absolutePath
+            actions.unshift(getNavigateAction(absolutePath, options.iconNavigate))
           }
-
-          picker.items = [...actions, ...items]
         } else {
-          picker.items = items
+          if (isValidPath(folderPath, false)) {
+            actions.unshift(getCreateAction(folderPath, `Create in ${currentPath}`, options.iconCreate))
+          } else {
+            picker.items = [getClearInputAction('Invalid folder name', options.iconClear)]
+            return
+          }
         }
+
+        picker.items = [...actions, ...items]
       } else {
-        picker.placeholder = ''
         picker.items = items
       }
-    }, options.responseSpeed)
 
-    zepActions.onBeforeRun(() => {
-      picker.busy = true
-    })
-
-    zepActions.onAfterRun(() => {
       picker.busy = false
-    })
+    }, options.responseSpeed)
 
     zepActions.onError((self, error) => {
       if (typeof options.onError === 'function') {
@@ -389,7 +380,28 @@ function showFolderPicker(directory, options) {
       }
     })
 
-    picker.items = items
+    const zepChanged = new Zep((self, items) => {
+      // wait for Zep to do its magic 🔮
+      if (picker.value === '' && !zepActions.isWaiting && items.length > 0) {
+        try {
+          picker.placeholder = resolve(join(currentPath, items[0].path))
+        } catch (exp) {
+          if (typeof options.onError === 'function') {
+            options.onError(exp)
+          }
+        }
+      }
+    }, options.responseSpeed)
+
+    zepChanged.onError((self, error) => {
+      if (typeof options.onError === 'function') {
+        options.onError(error)
+      }
+    })
+
+    picker.onDidChangeActive((e) => {
+      zepChanged.run(e)
+    })
 
     picker.onDidHide(() => {
       // free-up memory
@@ -401,18 +413,10 @@ function showFolderPicker(directory, options) {
     })
 
     picker.onDidChangeValue((e) => {
-      zepActions.run(e)
-    })
-
-    picker.onDidChangeActive((e) => {
-      if (e.length > 0) {
-        try {
-          picker.placeholder = resolve(join(currentPath, e[0].path))
-        } catch (exp) {
-          if (typeof options.onError === 'function') {
-            options.onError(exp)
-          }
-        }
+      if (!e) {
+        picker.items = items
+      } else {
+        zepActions.run(e)
       }
     })
 
