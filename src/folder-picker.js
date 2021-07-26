@@ -139,10 +139,6 @@ function iconify(label, icon) {
  * @returns {string[]}
  */
 function getDirectories(path, options) {
-  if (!path) {
-    path = homedir()
-  }
-
   if (typeof options.onFetch === 'function') {
     options.onFetch()
   }
@@ -309,6 +305,11 @@ function showFolderPicker(directory, options) {
     options = fillOptions(options || {})
 
     const picker = vscode.window.createQuickPick()
+
+    if (!directory) {
+      directory = homedir()
+    }
+
     const resolvedDirectory = resolve(directory)
     let currentPath = resolvedDirectory
     let entries = getDirectories(currentPath, options)
