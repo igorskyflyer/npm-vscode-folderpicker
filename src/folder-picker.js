@@ -59,9 +59,9 @@ const Zep = require('@igor.dvlpr/zep')
  */
 const ResponseSpeed = {
   Instant: 0,
-  Fast: 150,
-  Normal: 600,
-  Lazy: 1700,
+  Fast: 120,
+  Normal: 480,
+  Lazy: 1000,
 }
 
 /**
@@ -305,6 +305,9 @@ function showFolderPicker(directory, options) {
     options = fillOptions(options || {})
 
     const picker = vscode.window.createQuickPick()
+    picker.title = options.dialogTitle
+    picker.ignoreFocusOut = options.ignoreFocusOut
+    picker.canSelectMany = false
 
     if (!directory) {
       directory = homedir()
@@ -313,13 +316,14 @@ function showFolderPicker(directory, options) {
     const resolvedDirectory = resolve(directory)
     const clearAction = [getClearInputAction('Invalid folder name', options.iconClear)]
     let currentPath = resolvedDirectory
+
+    picker.busy = true
+
     let entries = getDirectories(currentPath, options)
     let items = getDirectoryItems(entries, options)
-
-    picker.title = options.dialogTitle
-    picker.ignoreFocusOut = options.ignoreFocusOut
-    picker.canSelectMany = false
     picker.items = items
+
+    picker.busy = false
 
     if (options.showConfigButton) {
       picker.buttons = [{ iconPath: new vscode.ThemeIcon('gear'), tooltip: 'Configure...' }]
