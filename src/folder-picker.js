@@ -5,9 +5,9 @@ const { homedir } = require('os')
 const vscode = require('vscode')
 
 const { readDirSync, Entry, Depth } = require('@igor.dvlpr/recursive-readdir')
-const { u } = require('@igor.dvlpr/upath')
+const { u, slash } = require('@igor.dvlpr/upath')
 const { pathExists } = require('@igor.dvlpr/pathexists')
-const { isRootDirectory } = require('@igor.dvlpr/is-rootdir')
+const { isRootDirectory, isRootDirectoryWin } = require('@igor.dvlpr/is-rootdir')
 const { isValidPath } = require('@igor.dvlpr/valid-path')
 const Zep = require('@igor.dvlpr/zep')
 
@@ -354,7 +354,37 @@ function showFolderPicker(directory, options) {
 
         if (isAbsolute(absolutePath)) {
           if (!canAccess(absolutePath)) {
-            actions.unshift(getCreateAction(folderPath, `Create "${folderPath}"`, options.iconCreate))
+            const components = absolutePath.split(slash).filter(Boolean)
+
+            // need to remove the drive letter from the path on Windows to check its validity
+            if (isRootDirectoryWin(components[0])) {
+              components.shift()
+            }
+
+            const componentsCount = components.length
+
+            if (componentsCount > 0) {
+              let isInvalid = false
+
+              for (let i = 0; i < componentsCount; i++) {
+                if (!isValidPath(components[i], false)) {
+                  isInvalid = true
+                  break
+                }
+              }
+
+              if (isInvalid) {
+                picker.items = clearAction
+                picker.busy = false
+                return
+              } else {
+                actions.unshift(getCreateAction(folderPath, `Create "${folderPath}"`, options.iconCreate))
+              }
+            } else {
+              picker.items = clearAction
+              picker.busy = false
+              return
+            }
           } else {
             // fixes an issue with non-proper path case
             absolutePath = realpathSync.native(absolutePath)
