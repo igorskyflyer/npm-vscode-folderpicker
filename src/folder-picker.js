@@ -1,6 +1,6 @@
 const { resolve, join, isAbsolute } = require('path')
 const { accessSync, realpathSync } = require('fs')
-const { homedir } = require('os')
+const { homedir, platform } = require('os')
 
 const vscode = require('vscode')
 
@@ -294,6 +294,34 @@ function getClearInputAction(description, icon) {
 }
 
 /**
+ * @private
+ * @param {string} absolutePath
+ *@returns {boolean}
+ */
+function isValidAbsolutePath(absolutePath) {
+  const components = absolutePath.split(slash).filter(Boolean)
+  let componentsCount = components.length
+  let isInvalid = false
+
+  if (componentsCount > 0) {
+    // need to remove the drive letter from the path on Windows to check its validity
+    if (platform() === 'win32' && isRootDirectoryWin(components[0])) {
+      components.shift()
+      componentsCount--
+    }
+
+    for (let i = 0; i < componentsCount; i++) {
+      if (!isValidPath(components[i], false)) {
+        isInvalid = true
+        break
+      }
+    }
+  }
+
+  return isInvalid
+}
+
+/**
  * Shows an interactive Folder Picker and Creator dialog.
  * @public
  * @param {string} directory the initial directory to show in Folder Picker UI, if none is specified default to user home directory
@@ -354,32 +382,8 @@ function showFolderPicker(directory, options) {
 
         if (isAbsolute(absolutePath)) {
           if (!canAccess(absolutePath)) {
-            const components = absolutePath.split(slash).filter(Boolean)
-
-            // need to remove the drive letter from the path on Windows to check its validity
-            if (isRootDirectoryWin(components[0])) {
-              components.shift()
-            }
-
-            const componentsCount = components.length
-
-            if (componentsCount > 0) {
-              let isInvalid = false
-
-              for (let i = 0; i < componentsCount; i++) {
-                if (!isValidPath(components[i], false)) {
-                  isInvalid = true
-                  break
-                }
-              }
-
-              if (isInvalid) {
-                picker.items = clearAction
-                picker.busy = false
-                return
-              } else {
-                actions.unshift(getCreateAction(folderPath, `Create "${folderPath}"`, options.iconCreate))
-              }
+            if (!isValidAbsolutePath(absolutePath)) {
+              actions.unshift(getCreateAction(folderPath, `Create "${folderPath}"`, options.iconCreate))
             } else {
               picker.items = clearAction
               picker.busy = false
