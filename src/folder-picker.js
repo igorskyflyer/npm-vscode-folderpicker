@@ -281,7 +281,7 @@ function getNavigateAction(path, icon) {
  * @param {string|vscode.ThemeIcon} icon
  */
 function getPickCurrentAction(icon) {
-  return getAction(resolveIcon(icon), 'Pick current folder', '.', false, Action.PickFolder)
+  return getAction(`${resolveIcon(icon)} .`, 'Pick current folder', '.', false, Action.PickFolder)
 }
 
 /**
