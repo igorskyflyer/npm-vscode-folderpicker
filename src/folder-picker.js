@@ -425,7 +425,7 @@ function showFolderPicker(directory, options) {
 
     const zepChanged = new Zep((self, items) => {
       // wait for Zep to do its magic 🔮
-      if (picker.value === '' && !zepActions.isWaiting && items.length > 0) {
+      if (picker.value === '' && !zepActions.isWaiting) {
         try {
           picker.placeholder = resolve(join(currentPath, items[0].path))
         } catch (exp) {
@@ -443,7 +443,9 @@ function showFolderPicker(directory, options) {
     })
 
     picker.onDidChangeActive((e) => {
-      zepChanged.run(e)
+      if (e.length > 0) {
+        zepChanged.run(e)
+      }
     })
 
     picker.onDidHide(() => {
@@ -461,7 +463,6 @@ function showFolderPicker(directory, options) {
       if (!e) {
         picker.items = items
         picker.busy = false
-        zepActions.abort()
       } else {
         zepActions.run(e)
       }
