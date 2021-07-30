@@ -368,6 +368,10 @@ function showFolderPicker(directory, options) {
     }
 
     const zepActions = new Zep((self, e) => {
+      if (e !== picker.value) {
+        return
+      }
+
       // ah, path-safety 😌
       let folderPath = u(e)
 
@@ -457,6 +461,7 @@ function showFolderPicker(directory, options) {
       if (!e) {
         picker.items = items
         picker.busy = false
+        zepActions.abort()
       } else {
         zepActions.run(e)
       }
