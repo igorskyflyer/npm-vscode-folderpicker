@@ -26,7 +26,7 @@
 	"author": "Igor Dimitrijević",
 	"license": "MIT",
 	"dependencies": {
-		"@igor.dvlpr/is-rootdir": "^1.0.0",
+		"@igor.dvlpr/is-rootdir": "^2.1.1",
 		"@igor.dvlpr/pathexists": "^1.0.0",
 		"@igor.dvlpr/recursive-readdir": "^1.2.1",
 		"@igor.dvlpr/upath": "^1.2.1",
