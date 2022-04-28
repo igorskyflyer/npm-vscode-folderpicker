@@ -9,7 +9,7 @@ const { u, slash } = require('@igor.dvlpr/upath')
 const { pathExists } = require('@igor.dvlpr/pathexists')
 const { isRootDirectory, isRootDirectoryWin } = require('@igor.dvlpr/is-rootdir')
 const { isValidPath } = require('@igor.dvlpr/valid-path')
-const Zep = require('@igor.dvlpr/zep')
+const { Zep } = require('@igor.dvlpr/zep')
 
 /* 🦎 Developed using Gecko 🦎 */
 
