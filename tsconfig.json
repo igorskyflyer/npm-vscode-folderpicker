@@ -2,6 +2,9 @@
 	"include": [
 		"./src/*.js"
 	],
+	"exclude": [
+		"node_modules"
+	],
 	"compilerOptions": {
 		"allowJs": true,
 		"declaration": true,
