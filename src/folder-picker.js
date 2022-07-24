@@ -77,6 +77,7 @@ const ResponseSpeed = {
  * @property {string|vscode.ThemeIcon} [iconClear='']
  * @property {ResponseSpeed} [responseSpeed=ResponseSpeed.Normal]
  * @property {boolean} [ignoreFocusOut=true]
+ * @property {boolean} [canPick=true]
  * @property {NewFolderActionCallback} [onCreateFolder]
  * @property {ActionCallback} [onNavigateTo]
  * @property {ActionCallback} [onGoUp]
@@ -152,7 +153,9 @@ function getDirectories(path, options) {
     entries.unshift('..')
   }
 
-  entries.unshift('.')
+  if (options.canPick) {
+    entries.unshift('.')
+  }
 
   return entries
 }
@@ -166,7 +169,7 @@ function getDirectories(path, options) {
  */
 function getDirectoryItems(entries, options) {
   return entries.map((entry) => {
-    if (entry === '.') {
+    if (options.canPick && entry === '.') {
       return getPickCurrentAction(options.iconPick)
     }
     if (entry === '..') {
@@ -232,6 +235,8 @@ function fillOptions(options) {
 
   // allows passing of ResponseSpeed.Instant = 0
   options.responseSpeed = options.responseSpeed == undefined ? ResponseSpeed.Normal : options.responseSpeed
+
+  options.canPick = options.canPick == undefined ? true : options.canPick
 
   return options
 }
