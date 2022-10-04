@@ -29,7 +29,7 @@
 		"@igor.dvlpr/is-rootdir": "^2.1.2",
 		"@igor.dvlpr/pathexists": "^2.1.2",
 		"@igor.dvlpr/recursive-readdir": "^2.1.4",
-		"@igor.dvlpr/upath": "^2.1.1",
+		"@igor.dvlpr/upath": "^2.1.2",
 		"@igor.dvlpr/valid-path": "^2.2.0",
 		"@igor.dvlpr/zep": "^5.0.2"
 	},
