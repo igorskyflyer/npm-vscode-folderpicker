@@ -60,7 +60,7 @@ const { Zep } = require('@igor.dvlpr/zep')
 const ResponseSpeed = {
   Instant: 0,
   Fast: 120,
-  Normal: 480,
+  Normal: 360,
   Lazy: 1000,
 }
 
@@ -69,6 +69,7 @@ const ResponseSpeed = {
  * @property {string} [dialogTitle='Pick a Folder']
  * @property {boolean} [showIcons=true]
  * @property {boolean} [showConfigButton=false]
+ * @property {boolean} [autoNavigate=false]
  * @property {string|vscode.ThemeIcon} [iconFolder='']
  * @property {string|vscode.ThemeIcon} [iconFolderUp='']
  * @property {string|vscode.ThemeIcon} [iconCreate='']
@@ -221,8 +222,8 @@ function fillOptions(options) {
     options.iconFolder = resolveIcon(options.iconFolder) || '$(folder)'
     options.iconFolderUp = resolveIcon(options.iconFolderUp) || '$(folder-opened)'
     options.iconCreate = resolveIcon(options.iconCreate) || '$(new-folder)'
-    options.iconNavigate = resolveIcon(options.iconNavigate) || '$(chevron-right)'
-    options.iconPick = resolveIcon(options.iconPick) || '$(check)'
+    options.iconNavigate = resolveIcon(options.iconNavigate) || '$(file-submodule)'
+    options.iconPick = resolveIcon(options.iconPick) || '$(folder-active)'
     options.iconClear = resolveIcon(options.iconClear) || '$(close)'
   } else {
     options.iconFolder = ''
@@ -237,6 +238,8 @@ function fillOptions(options) {
   options.responseSpeed = options.responseSpeed == undefined ? ResponseSpeed.Normal : options.responseSpeed
 
   options.canPick = options.canPick == undefined ? true : options.canPick
+
+  options.autoNavigate = options.autoNavigate == undefined ? false : options.autoNavigate
 
   return options
 }
@@ -406,7 +409,16 @@ function showFolderPicker(directory, options) {
           }
         } else {
           if (isValidPath(folderPath, false)) {
-            actions.unshift(getCreateAction(folderPath, `Create in ${currentPath}`, options.iconCreate))
+            if (options.autoNavigate && canAccess(join(currentPath, folderPath))) {
+              currentPath = join(currentPath, folderPath)
+              actions.unshift(`Navigating to ${folderPath}...`)
+              entries = getDirectories(currentPath, options)
+              items = getDirectoryItems(entries, options)
+              picker.value = ''
+              picker.placeholder = currentPath
+            } else {
+              actions.unshift(getCreateAction(folderPath, `Create in ${currentPath}`, options.iconCreate))
+            }
           } else {
             picker.items = clearAction
             picker.busy = false
@@ -554,7 +566,6 @@ function showFolderPicker(directory, options) {
   }
 }
 
-// here 👇 you should export VS Code dependent API
 module.exports = {
   showFolderPicker,
   ResponseSpeed,
