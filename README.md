@@ -98,6 +98,8 @@ Be aware that the term _icon_ is used here as a descriptive one, this property e
 
 - **`[showConfigButton]`**: **boolean** = **false** - whether to show a Config button in the top-right corner of the Picker. Defaults to **false**,
 
+- **`[autoNavigate]`**: **boolean** = **false** - whether to auto navigate to a child folder when creating new child folders. Defaults to **false**,
+
 - **`[canPick]`**: **boolean** = **false** - whether to enable picking of current folder in the Picker. Defaults to **true**,
 
 - **`[onCreateFolder]`**: **(folderPath: string) => void** - called when the New Folder action is triggered, here you should put your logic for folder creation,
