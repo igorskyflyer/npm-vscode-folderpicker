@@ -1,6 +1,6 @@
 # 📒 Changelog
 
-### of [@igorskyflyer/vscode-folderpicker](https://github.com/igorskyflyer/npm-vscode-folderpicker)
+### of [**@igorskyflyer/vscode-folderpicker**](https://github.com/igorskyflyer/npm-vscode-folderpicker)
 
 <br>
 
