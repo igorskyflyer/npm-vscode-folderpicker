@@ -43,7 +43,7 @@
 ## 🎯 Motivation
 
 This module powers my **[New Folder](https://github.com/igorskyflyer/vscode-new-folder)** VS Code extension.  
-It is under active development - expect breaking changes.
+It is under active development - expect ***breaking*** changes.
 
 ### The goal
 Provide a simple UI/UX for creating new folders when opening a new or blank VS Code instance, since that behavior is not built‑in.
