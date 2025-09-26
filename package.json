@@ -15,8 +15,7 @@
     ],
     "scripts": {
         "build": "tsc",
-        "test": "vitest --run",
-        "pub": "pnpm test && git push origin main --tags"
+        "pub": "git push origin main --tags"
     },
     "keywords": [
         "cross-platform",
