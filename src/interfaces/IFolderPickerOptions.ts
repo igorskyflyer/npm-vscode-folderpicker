@@ -48,6 +48,8 @@ export interface IFolderPickerOptions {
    * Can be a predefined `ResponseSpeed` or a custom debounce interval in ms.
    *
    * Defaults to `ResponseSpeed.Normal`.
+   *
+   * Setting this property to `ResponseSpeed.Instant` disables all throttling/debouncing!
    */
   responseSpeed: ResponseSpeed | number
 
