@@ -38,6 +38,8 @@
 - 📂 Create & Navigate Folders
 - 🔔 Error & Action Callbacks
 
+<br>
+
 ## 🎯 Motivation
 
 This module powers my **[New Folder](https://github.com/igorskyflyer/vscode-new-folder)** VS Code extension.  
