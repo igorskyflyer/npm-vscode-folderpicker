@@ -82,7 +82,7 @@ npm i @igorskyflyer/vscode-folderpicker
 
 ## 🤹🏼 API
 
-<a id="folder-picker-responsespeed"></a>
+### ResponseSpeed
 
 ```ts
 enum ResponseSpeed
@@ -100,7 +100,8 @@ Available values are: `Instant`, `Fast`, `Normal` (**default**), `Lazy`.
 >
 
 <br>
-<br>
+
+### showFolderPicker()
 
 ```ts
 showFolderPicker(directory: string, options?: Partial<IFolderPickerOptions>): void
@@ -137,7 +138,7 @@ See the [**Icons**] section below.
 
 - **`[autoNavigate]`**: **boolean** = **false** - Whether to auto navigate to a child folder when creating new child folders. Defaults to `false`.  
 
-- **`[responseSpeed]`**: **ResponseSpeed | number** = **ResponseSpeed.Normal** - Controls how quickly the picker responds to user input. Can be a predefined `ResponseSpeed` or a custom debounce interval in ms. See [**ResponseSpeed**](#folder-picker-responsespeed). Defaults to `ResponseSpeed.Normal`.  
+- **`[responseSpeed]`**: **ResponseSpeed | number** = **ResponseSpeed.Normal** - Controls how quickly the picker responds to user input. Can be a predefined `ResponseSpeed` or a custom debounce interval in ms. See [**ResponseSpeed**](#responsespeed). Defaults to `ResponseSpeed.Normal`.  
 
 - **`[ignoreFocusOut]`**: **boolean** = **false** - Whether the picker remains open when focus is lost. Defaults to `false`.  
 
