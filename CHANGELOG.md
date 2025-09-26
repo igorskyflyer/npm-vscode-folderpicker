@@ -7,7 +7,7 @@
 ## v3.0.0 (*26-Sep-2025*)
 
 - **❌ breaking**: migrate from CommonJS + JSDoc typedefs to full TypeScript with ES modules
-- **❌ breaking**: simplify callback signatures - most no longer expose `QuickPick`, with the exception of `UnspecifiedActionCallback`
+- **❌ breaking**: simplify callback signatures - most no longer expose `QuickPick`, with the exception of `UnknownActionCallback`
 - **✅ fix**: normalize error handling - `ErrorCallback` now always receives an `Error` instance, powered by [**Zep**](https://www.npmjs.com/package/@igorskyflyer/zep)
 - **💻 dev**: refactor `picker.onDidAccept` from inline `if/else` chain to `switch` with dedicated handler functions
 - **💻 dev**: new `IFolderPickerOptions`, `IFolderPickerState`, and `IFolderQuickPickItem` types
