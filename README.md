@@ -158,25 +158,25 @@ See the [**Icons**] section below.
 
 #### Behavior
 
-- **`[onCreateFolder]`**: **(folderPath: string) => void** - Callback fired when a new folder is created.  
+- **`[onCreateFolder]`**: **FolderActionCallback** - Fired when a new folder is created.  
 
-- **`[onPickFolder]`**: **(folderPath: string) => void** - Callback fired when a folder is picked/selected.  
+- **`[onPickFolder]`**: **FolderActionCallback** - Fired when a folder is picked/selected.  
 
-- **`[onNavigateTo]`**: **(folderPath: string) => void** - Callback fired when navigating into a folder.  
+- **`[onNavigateTo]`**: **FolderActionCallback** - Fired when navigating into a folder.  
 
-- **`[onGoUp]`**: **(folderPath: string) => void** - Callback fired when navigating up to the parent folder.  
+- **`[onGoUp]`**: **FolderActionCallback** - Fired when navigating up to the parent folder.  
 
-- **`[onFetch]`**: **() => void** - Callback fired before fetching folder contents.  
+- **`[onFetch]`**: **FetchCallback** - Fired before fetching folder contents.  
 
-- **`[onFetched]`**: **() => void** - Callback fired after folder contents have been fetched.  
+- **`[onFetched]`**: **FetchCallback** - Fired after folder contents have been fetched.  
 
-- **`[onClose]`**: **() => void** - Callback fired when the picker is closed.  
+- **`[onClose]`**: **UICallback** - Fired when the picker is closed.  
 
-- **`[onConfigButton]`**: **() => void** - Callback fired when the configuration button is pressed. Requires `showConfigButton` to be set to `true`.  
+- **`[onConfigButton]`**: **UICallback** - Fired when the configuration button is pressed. Requires `showConfigButton` to be set to `true`.  
 
-- **`[onError]`**: **(error: Error) => void** - Callback fired when an error occurs.  
+- **`[onError]`**: **ErrorCallback** - Fired when an error occurs (always receives an `Error`).  
 
-- **`[onUnspecifiedAction]`**: **(ui: vscode.QuickPick) => void** - Callback fired for actions not covered by other handlers. Provides full access to the underlying QuickPick if needed.
+- **`[onUnknownAction]`**: **UnknownActionCallback** - Fired for actions not covered by other handlers. Provides full access to the underlying `QuickPick`.  
 
 <br>
 
