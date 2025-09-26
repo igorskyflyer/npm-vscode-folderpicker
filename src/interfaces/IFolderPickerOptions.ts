@@ -31,22 +31,36 @@ export interface IFolderPickerOptions {
   */
   showIcons: boolean
 
-  /** Whether to display a configuration (⚙️) button in the UI. */
+  /** Whether to display a configuration (⚙️) button in the UI.
+  *
+  * Defaults to `false`.
+  */
   showConfigButton: boolean
 
-  /** Whether to auto navigate to a child folder when creating new child folders. */
+  /** Whether to auto navigate to a child folder when creating new child folders.
+  *
+  * Defaults to `false`.
+  */
   autoNavigate: boolean
 
   /**
    * Controls how quickly the picker responds to user input.
    * Can be a predefined `ResponseSpeed` or a custom debounce interval in ms.
+   *
+   * Defaults to `ResponseSpeed.Normal`.
    */
   responseSpeed: ResponseSpeed | number
 
-  /** Whether the picker remains open when focus is lost. */
+  /** Whether the picker remains open when focus is lost.
+  *
+  * Defaults to `false`.
+  */
   ignoreFocusOut: boolean
 
-  /** Whether to enable picking of current folder in the Picker. */
+  /** Whether to enable picking of current folder in the Picker.
+  *
+  * Defaults to `true`.
+  */
   canPick: boolean
 
   /** Icon used for folder entries. */
