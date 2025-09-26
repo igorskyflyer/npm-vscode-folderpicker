@@ -1,7 +1,6 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/media/vscode-folderpicker.png" alt="Icon of FolderPicker" width="256" height="256">
   <h1>FolderPicker</h1>
-  <sub><em>for Visual Studio Code</em></sub>
 </div>
 
 <blockquote align="center">VS Code Folder Picker • Cross‑Platform • Icons & Validation • Instant Navigation</blockquote>
