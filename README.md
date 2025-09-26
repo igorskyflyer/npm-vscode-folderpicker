@@ -90,7 +90,7 @@ enum ResponseSpeed
 
 Used for controlling the response speed of the `InputBox` of the `QuickPick`. Since `v.2.0.0` callbacks for generating Actions are throttled/debounced when necessary and the picker now waits for the user to finish their input before generating available Actions for performance reasons. Throttling is provided by [`Zep()`](https://www.npmjs.com/package/@igorskyflyer/zep).  
 
-Available values are: `Instant`, `Fast`, `Normal` (default), `Lazy`.
+Available values are: `Instant`, `Fast`, `Normal` (**default**), `Lazy`.
 
 <br>
 
