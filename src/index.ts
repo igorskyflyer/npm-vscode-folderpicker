@@ -143,7 +143,7 @@ function fillOptions(
     onClose: undefined,
     onConfigButton: undefined,
     onError: undefined,
-    onUnspecifiedAction: undefined
+    onUnknownAction: undefined
   }
 
   const options: IFolderPickerOptions = defineStrictOptions(defaults, userOpts)
@@ -455,12 +455,12 @@ function handleClear(
   return refreshItems(picker, state)
 }
 
-function handleUnspecified(
+function handleUnknown(
   picker: FolderPicker,
   state: IFolderPickerState
 ): IFolderPickerState {
-  if (typeof state.options.onUnspecifiedAction === 'function') {
-    state.options.onUnspecifiedAction(picker)
+  if (typeof state.options.onUnknownAction === 'function') {
+    state.options.onUnknownAction(picker)
     picker.hide()
   }
 
@@ -484,8 +484,8 @@ function pickerAccept(
   state: IFolderPickerState
 ): IFolderPickerState {
   if (picker.activeItems.length === 0) {
-    if (typeof state.options.onUnspecifiedAction === 'function') {
-      state.options.onUnspecifiedAction(picker)
+    if (typeof state.options.onUnknownAction === 'function') {
+      state.options.onUnknownAction(picker)
     }
 
     return state
@@ -513,7 +513,7 @@ function pickerAccept(
       return handleClear(picker, state)
 
     default:
-      return handleUnspecified(picker, state)
+      return handleUnknown(picker, state)
   }
 }
 
