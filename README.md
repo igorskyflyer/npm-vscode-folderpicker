@@ -96,7 +96,7 @@ Available values are: `Instant`, `Fast`, `Normal` (**default**), `Lazy`.
 >
 > #### Throttling
 >
-> Setting this property to `Instant` disables all throttling/debouncing!
+> Setting this property to `ResponseSpeed.Instant` disables all throttling/debouncing!
 >
 
 <br>
