@@ -3,7 +3,7 @@
 import type { ActionCallback } from '../types/ActionCallback.js'
 import type { ErrorCallback } from '../types/ErrorCallback.js'
 import type { FetchCallback } from '../types/FetchCallback.js'
-import type { Icon } from '../types/Icon.js'
+import type { LabelIcon } from '../types/LabelIcon.js'
 import type { NewFolderActionCallback } from '../types/NewFolderActionCallback.js'
 import type { PickFolderActionCallback } from '../types/PickFolderActionCallback.js'
 import type { ResponseSpeed } from '../types/ResponseSpeed.js'
@@ -18,12 +18,12 @@ export interface IFolderPickerOptions {
   responseSpeed: ResponseSpeed | number
   ignoreFocusOut: boolean
   canPick: boolean
-  iconFolder: Icon
-  iconFolderUp: Icon
-  iconCreate: Icon
-  iconNavigate: Icon
-  iconPick: Icon
-  iconClear: Icon
+  iconFolder: LabelIcon
+  iconFolderUp: LabelIcon
+  iconCreate: LabelIcon
+  iconNavigate: LabelIcon
+  iconPick: LabelIcon
+  iconClear: LabelIcon
   onCreateFolder?: NewFolderActionCallback
   onNavigateTo?: ActionCallback
   onGoUp?: ActionCallback
