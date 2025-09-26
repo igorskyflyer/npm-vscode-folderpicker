@@ -1,11 +1,11 @@
 // Author: Igor Dimitrijević (@igorskyflyer)
 
 import type {
-  ActionCallback,
   ErrorCallback,
   FetchCallback,
   FolderActionCallback,
-  UnspecifiedActionCallback
+  UICallback,
+  UnknownActionCallback
 } from '../types/Callbacks.js'
 import type { LabelIcon } from '../types/LabelIcon.js'
 import type { ResponseSpeed } from '../types/ResponseSpeed.js'
@@ -102,10 +102,10 @@ export interface IFolderPickerOptions {
   onFetched?: FetchCallback
 
   /** Callback fired when the picker is closed. */
-  onClose?: ActionCallback
+  onClose?: UICallback
 
   /** Callback fired when the configuration button is pressed. */
-  onConfigButton?: ActionCallback
+  onConfigButton?: UICallback
 
   /** Callback fired when an error occurs.
    *
@@ -116,5 +116,5 @@ export interface IFolderPickerOptions {
    * Callback fired for actions not covered by other handlers.
    * Provides full access to the underlying QuickPick if needed.
    */
-  onUnspecifiedAction?: UnspecifiedActionCallback
+  onUnknownAction?: UnknownActionCallback
 }
