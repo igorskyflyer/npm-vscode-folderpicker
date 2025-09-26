@@ -518,11 +518,15 @@ function pickerAccept(
 }
 
 /**
- * Shows an interactive Folder Picker and Creator dialog.
+ * Opens an interactive Folder Picker dialog with folder creation support.
+ *
+ * Displays a navigable UI for selecting or creating folders.
+ * If no `directory` is provided, the user's home directory is shown by default.
+ *
  * @public
- * @param {string} directory the initial directory to show in Folder Picker UI, if none is specified default to user home directory
- * @param options additional options
- * @returns {void} no return value since everything is done in an interactive manner
+ * @param {string} directory - Initial directory to display in the picker.
+ * @param {Partial<IFolderPickerOptions>} [options] - Optional configuration to customize behavior and UI.
+ * @returns {void} This function is interactive and does not return a value.
  */
 export function showFolderPicker(
   directory: string,
