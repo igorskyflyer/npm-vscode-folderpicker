@@ -100,6 +100,7 @@ Available values are: `Instant`, `Fast`, `Normal` (**default**), `Lazy`.
 >
 
 <br>
+<br>
 
 ```ts
 showFolderPicker(directory: string, options?: Partial<IFolderPickerOptions>): void
