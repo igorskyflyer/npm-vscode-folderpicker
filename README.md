@@ -1,54 +1,86 @@
-## FolderPicker
+<div align="center">
+  <img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/media/vscode-folderpicker.png" alt="Icon of FolderPicker" width="256" height="256">
+  <h1>FolderPicker</h1>
+</div>
 
 <sub><em>for Visual Studio Code</em></sub>
 
-<br>
+<blockquote align="center">VS Code Folder Picker • Cross‑Platform • Icons & Validation • Instant Navigation</blockquote>
 
-<p align="center">Made possible with 🦎 <em>Gecko</em> - an upcoming project.</p>
-
-<br>
-
-> ⚠ This module is built as the core functionality of my **[New Folder](https://github.com/igorskyflyer/vscode-new-folder)** Visual Studio Code extension and is still under active development, use at own risk, if needed.
+<h4 align="center">
+  ✨ Fast, custom cross-platform folder picker and creator for VS Code with icons, validation, and instant navigation. 🎨
+</h4>
 
 <br>
 
-> ✨ Current major version `v.2.x.x` contains breaking changes.
+## 📃 Table of Contents
 
-<br>
-<br>
-
-Provides a custom Folder Picker API + UI for Visual Studio Code.
-
-<br>
-
-The module exposes a single function `showFolderPicker()` which provides a custom `QuickPick` UI rather than the _built-in_ Visual Studio Code `QuickPick` UI.
-
-<br>
-
-Currently, its functionalities are tightly-coupled with my extension **[New Folder](https://github.com/igorskyflyer/vscode-new-folder)** but I will make the module more generic in the future.
-
-<br>
-
-> 🙋‍♂️ The necessity for this module?
-
-> 💬 When I started my beforementioned **[New Folder](https://github.com/igorskyflyer/vscode-new-folder)** extension for Visual Studio Code my goal was to implement a simple UX for creating new folders when opening a new/blank instance of Visual Studio Code since that behavior is not built-in. I started with the built-in [`vscode.window.showSaveDialog()`](https://code.visualstudio.com/api/references/vscode-api) function which works great when you set the option `files.simpleDialog.enable` to `true` but that is a global preference and not everyone - including myself - wants to change the whole UX for file/folder opening just for that. Then I reached out to our friends at [@microsoft/vscode](https://github.com/microsoft/vscode) and posted a feature request [#127201](https://github.com/microsoft/vscode/issues/127201) to override this behavior but they closed the feature request as that is by-design. Another issue that was present is that the original code only allowed to create a single-level child folder (no nested/recursive folder creation) due to limitations of the native `vscode.window.showSaveDialog()` function. Upon closure I decided to build my own UI/logic for that and this project and module are what I managed to achieve so far. 🤗
+- [**Features**](#-features)
+- [**Motivation**](#-motivation)
+- [**Usage**](#-usage)
+- [**API**](#-api)
+- [**Examples**](#️-examples)
+- [**Demo**](#️-demo)
+- [**Changelog**](#-changelog)
+- [**Support**](#-support)
+- [**License**](#-license)
+- [**Related**](#-related)
+- [**Author**](#-author)
 
 <br>
 
-### Usage
+## 🤖 Features
 
-Install it by running
+- ✨ Fast Folder Selection
+- 🎨 Icons With Clear Visuals
+- ⚡ Instant Navigation
+- ✅ Path Validation
+- 🛠️ Configurable Buttons
+- 🎯 Custom Handlers & Events
+- 📂 Create & Navigate Folders
+- 🔔 Error & Action Callbacks
 
-```shell
-npm i "@igor.dvlpr/vscode-folderpicker"
+## 🎯 Motivation
+
+This module powers my **[New Folder](https://github.com/igorskyflyer/vscode-new-folder)** VS Code extension.  
+It is under active development - expect breaking changes.
+
+### The goal
+Provide a simple UI/UX for creating new folders when opening a new or blank VS Code instance, since that behavior is not built‑in.
+
+### Why not use `showSaveDialog()`?
+- Works only if `files.simpleDialog.enable` is set to `true` (a global preference that changes the UX for all file/folder dialogs).
+- Limited to creating a single‑level child folder - no nested/recursive folder creation.
+
+### What happened upstream?
+- I filed a feature request [#127201](https://github.com/microsoft/vscode/issues/127201) with [@microsoft/vscode](https://github.com/microsoft/vscode).
+- The request was closed as *by design*.
+
+### The result
+I built my own UI and logic to overcome these limitations.  
+This project is the outcome of that effort.
+
+<br>
+
+## 🕵🏼 Usage
+
+Install it by executing any of the following, depending on your preferred package manager:
+
+```bash
+pnpm add @igorskyflyer/vscode-folderpicker
+```
+
+```bash
+yarn add @igorskyflyer/vscode-folderpicker
+```
+
+```bash
+npm i @igorskyflyer/vscode-folderpicker
 ```
 
 <br>
-<br>
 
-### API
-
-<br>
+## 🤹🏼 API
 
 <a id="folder-picker-responsespeed"></a>
 
@@ -65,143 +97,288 @@ Note: setting the property `responseSpeed` in the `options` parameter of `showFo
 <br>
 
 ```ts
-showFolderPicker(directory: string, options?: FolderPickerOptions): void
+showFolderPicker(directory: string, options?: Partial<IFolderPickerOptions>): void
 ```
 
 **Parameters**
 
-_directory_: `string` - the initial directory to show in Folder Picker UI, if none is specified default to user home directory,
-_options_: `FolderPickerOptions` - additional options to pass and where you should place your callbacks, will most likely change in the near future. All properties are **optional** and callbacks are not defined.
+_directory_: `string` - Initial directory to display in the picker.
 
-Available properties/callbacks:
+_options_: `Partial<IFolderPickerOptions>` - Optional configuration to customize behavior and UI.  
 
-`FolderPickerOptions`
+Options:
 
-- **`[dialogTitle]`**: **string** = **'Pick a Folder'** - the Folder Picker title, shown at the top of the picker,
+### `IFolderPickerOptions`
 
-- **`[showIcons]`**: **boolean** = **true** - indicates whether icons will be shown in the Folder Picker. When this property is set to `false` all/any icons you set will be ignored,
+#### UI/UX
 
-Icons - grouped together for brevity
+- **`[dialogTitle]`**: **string** = **'Pick a Folder'** - Title text displayed at the top of the dialog. Defaults to `'Pick a Folder'`.  
 
-- **`[iconFolder]`**: **string** = '' - _icon_ to use for folder entries,
-- **`[iconFolderUp]`**: **string** = '' - _icon_ to use for the folder up entry,
-- **`[iconCreate]`**: **string** = '' - _icon_ to use for `Create folder` Action,
-- **`[iconNavigate]`**: **string** = '' - _icon_ to use for `Navigate to...` Action,
-- **`[iconPick]`**: **string** = '' - _icon_ to use for `Pick current directory` Action.
-- **`[iconClear]`**: **string** = '' - _icon_ to use for `Clear` Action, available when the folder name is not valid.
+- **`[showIcons]`**: **boolean** = **true** - Whether to show icons next to folder items. Defaults to `true`.  
 
-Be aware that the term _icon_ is used here as a descriptive one, this property expects a **single** emoji or a **single** `ThemeIcon` which is a string as well, to see the list of available ThemeIcons, look at the official Visual Studio Code documentation, **[here](https://code.visualstudio.com/api/references/icons-in-labels#icon-listing)**,
+Be aware that the term _icon_ is used here descriptively.  
 
-- **`[responseSpeed]`**: **ResponseSpeed** = **ResponseSpeed.Normal** - used for controlling the response speed of the `InputBox` of the `QuickPick`. See [ResponseSpeed](#folder-picker-responsespeed),
+This property expects either:  
+- a **single emoji** (e.g. `📂`), or  
+- a **VS Code ThemeIcon** (string shorthand like `'$(gear)'` or an object instance `new ThemeIcon('gear')`).  
 
-- **`[ignoreFocusOut]`**: **boolean** = **true** - whether the UI should stay open even when loosing UI focus. Defaults to **true**,
+To see the list of available ThemeIcons, look at the official [**Visual Studio Code documentation**](https://code.visualstudio.com/api/references/icons-in-labels#icon-listing).  
+See the [**Icons**] section below.  
 
-- **`[showConfigButton]`**: **boolean** = **false** - whether to show a Config button in the top-right corner of the Picker. Defaults to **false**,
+- **`[showConfigButton]`**: **boolean** = **false** - Whether to display a configuration (⚙️) button in the UI. Defaults to `false`.  
 
-- **`[autoNavigate]`**: **boolean** = **false** - whether to auto navigate to a child folder when creating new child folders. Defaults to **false**,
+- **`[autoNavigate]`**: **boolean** = **false** - Whether to auto navigate to a child folder when creating new child folders. Defaults to `false`.  
 
-- **`[canPick]`**: **boolean** = **false** - whether to enable picking of current folder in the Picker. Defaults to **true**,
+- **`[responseSpeed]`**: **ResponseSpeed** = **ResponseSpeed.Normal** - Controls how quickly the picker responds to user input. Can be a predefined `ResponseSpeed` or a custom debounce interval in ms. See [ResponseSpeed](#folder-picker-responsespeed). Defaults to `ResponseSpeed.Normal`.  
 
-- **`[onCreateFolder]`**: **(folderPath: string) => void** - called when the New Folder action is triggered, here you should put your logic for folder creation,
+- **`[ignoreFocusOut]`**: **boolean** = **false** - Whether the picker remains open when focus is lost. Defaults to `false`.  
 
-- **`[onNavigateTo]`**: **(folderPath: string, ui: vscode.QuickPick) => void** - called when the user is navigating to an arbitrary absolute path.
+- **`[canPick]`**: **boolean** = **true** - Whether to enable picking of current folder in the Picker. Defaults to `true`.  
 
-- **`[onGoUp]`**: **(folderPath: string, ui: vscode.QuickPick) => void** - called when the user has clicked on the parent folder entry, that navigates one folder up the directory tree.
+#### Icons
 
-- **`[onPickFolder]`**: **(folderPath: string) => void** - called when the user has picked a folder.
+- **`[iconFolder]`**: **string** = '' - Icon used for folder entries.  
 
-- **`[onError]`**: **(error: Error) => void** - called when an error has occurred.
+- **`[iconFolderUp]`**: **string** = '' - Icon used for the go up (parent folder) action.  
 
-- **`[onClose]`**: **() => void** - called when the user has closed the picker, either by picking a folder, creating a new one, removed focus from the UI - if applicable - `ignoreFocusOut = false`, or pressing `Esc`.
+- **`[iconCreate]`**: **string** = '' - Icon used for the create new folder action.  
 
-- **`[onConfigButton]`**: **() => void** - since `v.2.0.0` a Config button is shown at the top right corner of the UI. This callback will be invoked when clicking on it.
+- **`[iconNavigate]`**: **string** = '' - Icon used for navigation actions.  
 
-- **`[onFetch]`**: **() => void** - called before the picker fetches directory entries. Most likely this callback will be **removed**.
+- **`[iconPick]`**: **string** = '' - Icon used for the pick action.  
 
-- **`[onUnspecifiedAction]`**: **(ui: vscode.QuickPick) => void** - called when there is no action specified. This callback might be triggered in some rare cases - might be removed.
+- **`[iconClear]`**: **string** = '' - Icon used for the clear action.  
+
+#### Behavior
+
+- **`[onCreateFolder]`**: **(folderPath: string) => void** - Callback fired when a new folder is created.  
+
+- **`[onPickFolder]`**: **(folderPath: string) => void** - Callback fired when a folder is picked/selected.  
+
+- **`[onNavigateTo]`**: **(folderPath: string) => void** - Callback fired when navigating into a folder.  
+
+- **`[onGoUp]`**: **(folderPath: string) => void** - Callback fired when navigating up to the parent folder.  
+
+- **`[onFetch]`**: **() => void** - Callback fired before fetching folder contents.  
+
+- **`[onFetched]`**: **() => void** - Callback fired after folder contents have been fetched.  
+
+- **`[onClose]`**: **() => void** - Callback fired when the picker is closed.  
+
+- **`[onConfigButton]`**: **() => void** - Callback fired when the configuration button is pressed. Requires `showConfigButton` to be set to `true`.  
+
+- **`[onError]`**: **(error: Error) => void** - Callback fired when an error occurs.  
+
+- **`[onUnspecifiedAction]`**: **(ui: vscode.QuickPick) => void** - Callback fired for actions not covered by other handlers. Provides full access to the underlying QuickPick if needed.
 
 <br>
-<br>
 
-### Example
+## 🗒️ Examples
 
-then call it inside your extension's code,
-
-```js
+```ts
 // some magic code 🔮
 
-showFolderPicker(directory, {
-  iconFolder: '⚡',
-  iconFolderUp: '🔼',
-  ignoreFocusOut: true,
-})
+import { showFolderPicker } from 'vscode-folderpicker'
+import { ThemeIcon } from 'vscode'
+
+function openFolderPicker() {
+  showFolderPicker('/Users/igorskyflyer/projects', {
+    dialogTitle: 'Select a Project Folder',
+    showIcons: true,
+    showConfigButton: true,
+    autoNavigate: false,
+    responseSpeed: 150, // custom debounce in ms
+    ignoreFocusOut: false,
+    canPick: true,
+
+    // custom icons (emoji or ThemeIcon)
+    iconFolder: '📂',
+    iconFolderUp: new ThemeIcon('arrow-up'),
+    iconCreate: new ThemeIcon('new-folder'),
+    iconNavigate: '➡️',
+    iconPick: '✅',
+    iconClear: '❌',
+
+    // lifecycle callbacks
+    onCreateFolder: (folderPath) => {
+      console.log('Created folder:', folderPath)
+    },
+    onPickFolder: (folderPath) => {
+      console.log('Picked folder:', folderPath)
+    },
+    onNavigateTo: (folderPath) => {
+      console.log('Navigated into:', folderPath)
+    },
+    onGoUp: (folderPath) => {
+      console.log('Went up to:', folderPath)
+    },
+    onFetch: () => {
+      console.log('Fetching folder contents…')
+    },
+    onFetched: () => {
+      console.log('Finished fetching folder contents')
+    },
+    onClose: () => {
+      console.log('Folder picker closed')
+    },
+    onConfigButton: () => {
+      console.log('Config button clicked')
+    },
+    onError: error => {
+      console.error('Error in folder picker:', error)
+    },
+    onUnspecifiedAction: (quickPick) => {
+      console.log('Unspecified action triggered', quickPick)
+    }
+  })
+}
 
 // even more magic code ✨
+
+openFolderPicker()
 ```
 
 <br>
 
-### Demo
+### 👁️ Demo
 
-#### Actions
+<div align="center">
+  <figure>
+    <img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-create-relative.gif" alt="VS Code Folder Picker - Command Palette creating a relative folder in current directory">
+    <br>
+    <figcaption>
+      <strong>Figure 1.</strong> <em>Command Palette creating a relative folder in the current directory</em>
+    </figcaption>
+  </figure>
+
+  <br>
+  <br>
+
+  <figure>
+    <img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-create-absolute.gif" alt="VS Code Folder Picker - Command Palette creating a folder with absolute path">
+    <br>
+    <figcaption>
+      <strong>Figure 2.</strong> <em>Command Palette creating a folder with an absolute path</em>
+    </figcaption>
+  </figure>
+
+  <br>
+  <br>
+
+  <figure>
+    <img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-recursive-folder.gif" alt="VS Code Folder Picker - Command Palette creating nested recursive folders">
+    <br>
+    <figcaption>
+      <strong>Figure 3.</strong> <em>Command Palette creating folders recursively in the current directory</em>
+    </figcaption>
+  </figure>
+
+  <br>
+  <br>
+
+  <figure>
+    <img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-invalid-folder.gif" alt="VS Code Folder Picker - Command Palette showing invalid folder name error">
+    <br>
+    <figcaption>
+      <strong>Figure 4.</strong> <em>Invalid folder name supplied in the Command Palette</em>
+    </figcaption>
+  </figure>
+
+  <br>
+  <br>
+
+  <figure>
+    <img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-navigate-relative.gif" alt="VS Code Folder Picker - Command Palette navigating to relative folder path">
+    <br>
+    <figcaption>
+      <strong>Figure 5.</strong> <em>Navigation to relative‑path folders</em>
+    </figcaption>
+  </figure>
+
+  <br>
+  <br>
+
+  <figure>
+    <img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-navigate-absolute.gif" alt="VS Code Folder Picker - Command Palette navigating to absolute folder path">
+    <br>
+    <figcaption>
+      <strong>Figure 6.</strong> <em>Navigation to absolute‑path folders</em>
+    </figcaption>
+  </figure>
+
+  <br>
+  <br>
+
+  <figure>
+    <img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-pick-folder.gif" alt="VS Code Folder Picker - Command Palette picking a folder">
+    <br>
+    <figcaption>
+      <strong>Figure 7.</strong> <em>Picking a folder from the Command Palette</em>
+    </figcaption>
+  </figure>
+</div>
 
 <br>
 
-##### 🎯 Create
+## 📝 Changelog
 
-<p align="center">
-	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-create-relative.gif" alt="Command Palette: New Relative Folder">
-	<sub>Command palette command to create a folder in the current directory</sub>
-</p>
+📑 Read about the latest changes in the [**CHANGELOG**](https://github.com/igorskyflyer/npm-vscode-folderpicker/blob/main/CHANGELOG.md).
 
 <br>
-<br>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-create-absolute.gif" alt="Command Palette: New Absolute Folder">
-    <sub>Command palette command to create a folder with an absolute path</sub>
-</p>
+## 🪪 License
+
+Licensed under the [**MIT license**](https://github.com/igorskyflyer/npm-vscode-folderpicker/blob/main/LICENSE).
 
 <br>
-<br>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-recursive-folder.gif" alt="Command Palette: New Recursive Folder">
-    <sub>Command palette command to create folders recursively in the current folder</sub>
-</p>
+## 💖 Support
 
-<br>
-<br>
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-invalid-folder.gif" alt="Command Palette: Invalid Folder">
-    <sub>Invalid folder name supplied</sub>
-</p>
-
-<br>
-<br>
-
-##### 🎯 Navigate
-
-<p align="center">
-	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-navigate-relative.gif" alt="Command Palette: Navigate to Relative Folder">
-	<sub>Navigation to relative-path folders</sub>
-</p>
+<div align="center">
+  I work hard for every project, including this one and your support means a lot to me!
+  <br>
+  Consider buying me a coffee. ☕
+  <br>
+  <br>
+  <a href="https://ko-fi.com/igorskyflyer" target="_blank"><img src="https://raw.githubusercontent.com/igorskyflyer/igorskyflyer/main/assets/ko-fi.png" alt="Donate to igorskyflyer" width="180" height="46"></a>
+  <br>
+  <br>
+  <em>Thank you for supporting my efforts!</em> 🙏😊
+</div>
 
 <br>
-<br>
 
-<p align="center">
-	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-navigate-absolute.gif" alt="Command Palette: Navigate to Absolute Folder">
-	<sub>Navigation to absolute-path folders</sub>
-</p>
+## 🧬 Related
 
-<br>
-<br>
+[**@igorskyflyer/normalized-string**](https://www.npmjs.com/package/@igorskyflyer/normalized-string)
 
-<p align="center">
-	<img src="https://raw.githubusercontent.com/igorskyflyer/npm-vscode-folderpicker/main/screenshots/command-palette-pick-folder.gif" alt="Command Palette: Pick Folder">
-	<sub>Pick a Folder</sub>
-</p>
+> _💊 NormalizedString provides you with a String type with consistent line-endings, guaranteed. 📮_
 
 <br>
+
+[**@igorskyflyer/valid-path**](https://www.npmjs.com/package/@igorskyflyer/valid-path)
+
+> _🧰 Determines whether a given value can be a valid file/directory name. 🏜_
+
+<br>
+
+[**@igorskyflyer/comment-it**](https://www.npmjs.com/package/@igorskyflyer/comment-it)
+
+> _📜 Formats the provided string as a comment, either a single or a multi line comment for the given programming language. 💻_
+
+<br>
+
+[**@igorskyflyer/jmap**](https://www.npmjs.com/package/@igorskyflyer/jmap)
+
+> _🕶️ Reads a JSON file into a Map. 🌻_
+
+<br>
+
+[**@igorskyflyer/is-rootdir**](https://www.npmjs.com/package/@igorskyflyer/is-rootdir)
+
+> _🔼 Checks whether the given path is the root of a drive or filesystem. ⛔_
+
+<br>
+
+## 👨🏻‍💻 Author
+Created by **Igor Dimitrijević ([*@igorskyflyer*](https://github.com/igorskyflyer/))**.
