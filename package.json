@@ -1,41 +1,72 @@
 {
-	"name": "@igor.dvlpr/vscode-folderpicker",
-	"version": "2.5.0",
-	"description": "✨ Provides a custom Folder Picker API + UI for Visual Studio Code. 🎨",
-	"main": "src/folder-picker.js",
-	"files": [
-		"src/",
-		"dist/"
-	],
-	"types": "./dist/folder-picker.d.ts",
-	"scripts": {
-		"pub": "tsc && npm publish --access public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/igorskyflyer/npm-vscode-folderpicker.git"
-	},
-	"keywords": [
-		"vscode",
-		"api",
-		"dialog",
-		"folder",
-		"picker",
-		"ui"
-	],
-	"author": "Igor Dimitrijević",
-	"license": "MIT",
-	"dependencies": {
-		"@igor.dvlpr/is-rootdir": "^2.1.2",
-		"@igor.dvlpr/pathexists": "^2.1.2",
-		"@igor.dvlpr/recursive-readdir": "^2.1.4",
-		"@igor.dvlpr/upath": "^2.1.2",
-		"@igor.dvlpr/valid-path": "^2.2.1",
-		"@igor.dvlpr/zep": "^5.0.2"
-	},
-	"devDependencies": {
-		"@types/node": "^16.0.0",
-		"@types/vscode": "^1.71.0",
-		"typescript": "^4.8.4"
-	}
+    "name": "@igorskyflyer/vscode-folderpicker",
+    "version": "3.0.0",
+    "description": "✨ Fast, custom cross-platform folder picker and creator for VS Code with icons, validation, and instant navigation. 🎨",
+    "sideEffects": false,
+    "engines": {
+        "node": ">=22.0"
+    },
+    "type": "module",
+    "types": "./dist/index.d.ts",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "test": "vitest --run",
+        "pub": "pnpm test && git push origin main --tags"
+    },
+    "keywords": [
+        "cross-platform",
+        "developer-tools",
+        "directory-picker",
+        "directory-selector",
+        "file-system",
+        "folder-creator",
+        "folder-picker",
+        "folder-selector",
+        "icon-support",
+        "igor dimitrijević",
+        "igorskyflyer",
+        "instant-navigation",
+        "path-validation",
+        "ui-component",
+        "vscode-extension",
+        "vscode",
+        "workspace-tools"
+    ],
+    "license": "MIT",
+    "author": "Igor Dimitrijević <support@igorskyflyer.me> (https://github.com/igorskyflyer)",
+    "funding": "https://ko-fi.com/igorskyflyer",
+    "homepage": "https://github.com/igorskyflyer/npm-vscode-folderpicker",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/igorskyflyer/npm-vscode-folderpicker.git"
+    },
+    "bugs": {
+        "url": "https://github.com/igorskyflyer/npm-vscode-folderpicker/issues"
+    },
+    "dependencies": {
+        "@igorskyflyer/is-rootdir": "^2.2.0",
+        "@igorskyflyer/pathexists": "^3.0.0",
+        "@igorskyflyer/recursive-readdir": "^3.0.0",
+        "@igorskyflyer/upath": "^3.1.0",
+        "@igorskyflyer/valid-path": "^3.0.0",
+        "@igorskyflyer/zep": "^6.1.0",
+        "@igorskyflyer/zitto": "^1.0.0"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^2.2.4",
+        "@igorskyflyer/biome-config": "^2.1.0",
+        "@types/node": "^22.18.6",
+        "@types/vscode": "^1.102.0",
+        "typescript": "^5.9.2",
+        "vitest": "^3.2.4"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "packageManager": "pnpm@10.17.1"
 }
