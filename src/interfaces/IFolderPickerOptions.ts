@@ -1,14 +1,14 @@
 // Author: Igor Dimitrijević (@igorskyflyer)
 
-import type { ActionCallback } from '../types/ActionCallback.js'
-import type { ErrorCallback } from '../types/ErrorCallback.js'
-import type { FetchCallback } from '../types/FetchCallback.js'
+import type {
+  ActionCallback,
+  ErrorCallback,
+  FetchCallback,
+  FolderActionCallback,
+  UnspecifiedActionCallback
+} from '../types/Callbacks.js'
 import type { LabelIcon } from '../types/LabelIcon.js'
-import type { NewFolderActionCallback } from '../types/NewFolderActionCallback.js'
-import type { PickFolderActionCallback } from '../types/PickFolderActionCallback.js'
 import type { ResponseSpeed } from '../types/ResponseSpeed.js'
-import type { SimpleActionCallback } from '../types/SimpleActionCallback.js'
-import type { UnspecifiedActionCallback } from '../types/UnspecifiedActionCallback.js'
 
 export interface IFolderPickerOptions {
   dialogTitle: string
@@ -24,14 +24,14 @@ export interface IFolderPickerOptions {
   iconNavigate: LabelIcon
   iconPick: LabelIcon
   iconClear: LabelIcon
-  onCreateFolder?: NewFolderActionCallback
-  onNavigateTo?: ActionCallback
-  onGoUp?: ActionCallback
-  onPickFolder?: PickFolderActionCallback
-  onError?: ErrorCallback
-  onClose?: SimpleActionCallback
-  onConfigButton?: SimpleActionCallback
+  onCreateFolder?: FolderActionCallback
+  onPickFolder?: FolderActionCallback
+  onNavigateTo?: FolderActionCallback
+  onGoUp?: FolderActionCallback
   onFetch?: FetchCallback
   onFetched?: FetchCallback
+  onClose?: ActionCallback
+  onConfigButton?: ActionCallback
+  onError?: ErrorCallback
   onUnspecifiedAction?: UnspecifiedActionCallback
 }
