@@ -8,34 +8,37 @@ importers:
 
   .:
     dependencies:
-      '@igor.dvlpr/recursive-readdir':
-        specifier: ^2.1.5
-        version: 2.1.5
-      '@igor.dvlpr/valid-path':
-        specifier: ^2.2.1
-        version: 2.2.1
       '@igorskyflyer/is-rootdir':
         specifier: ^2.2.0
         version: 2.2.0
       '@igorskyflyer/pathexists':
         specifier: ^3.0.0
         version: 3.0.0
+      '@igorskyflyer/recursive-readdir':
+        specifier: ^3.0.0
+        version: 3.0.0
       '@igorskyflyer/upath':
         specifier: ^3.1.0
         version: 3.1.0
+      '@igorskyflyer/valid-path':
+        specifier: ^3.0.0
+        version: 3.0.0
       '@igorskyflyer/zep':
         specifier: ^6.1.0
         version: 6.1.0
+      '@igorskyflyer/zitto':
+        specifier: ^1.0.0
+        version: 1.0.0
     devDependencies:
       '@biomejs/biome':
-        specifier: ^2.2.2
-        version: 2.2.2
+        specifier: ^2.2.4
+        version: 2.2.4
       '@igorskyflyer/biome-config':
         specifier: ^2.1.0
-        version: 2.1.0(@biomejs/biome@2.2.2)
+        version: 2.1.0(@biomejs/biome@2.2.4)
       '@types/node':
-        specifier: ^22.18.0
-        version: 22.18.1
+        specifier: ^22.18.6
+        version: 22.18.6
       '@types/vscode':
         specifier: ^1.102.0
         version: 1.103.0
@@ -44,59 +47,59 @@ importers:
         version: 5.9.2
       vitest:
         specifier: ^3.2.4
-        version: 3.2.4(@types/node@22.18.1)
+        version: 3.2.4(@types/node@22.18.6)
 
 packages:
 
-  '@biomejs/biome@2.2.2':
-    resolution: {integrity: sha512-j1omAiQWCkhuLgwpMKisNKnsM6W8Xtt1l0WZmqY/dFj8QPNkIoTvk4tSsi40FaAAkBE1PU0AFG2RWFBWenAn+w==}
+  '@biomejs/biome@2.2.4':
+    resolution: {integrity: sha512-TBHU5bUy/Ok6m8c0y3pZiuO/BZoY/OcGxoLlrfQof5s8ISVwbVBdFINPQZyFfKwil8XibYWb7JMwnT8wT4WVPg==}
     engines: {node: '>=14.21.3'}
     hasBin: true
 
-  '@biomejs/cli-darwin-arm64@2.2.2':
-    resolution: {integrity: sha512-6ePfbCeCPryWu0CXlzsWNZgVz/kBEvHiPyNpmViSt6A2eoDf4kXs3YnwQPzGjy8oBgQulrHcLnJL0nkCh80mlQ==}
+  '@biomejs/cli-darwin-arm64@2.2.4':
+    resolution: {integrity: sha512-RJe2uiyaloN4hne4d2+qVj3d3gFJFbmrr5PYtkkjei1O9c+BjGXgpUPVbi8Pl8syumhzJjFsSIYkcLt2VlVLMA==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [darwin]
 
-  '@biomejs/cli-darwin-x64@2.2.2':
-    resolution: {integrity: sha512-Tn4JmVO+rXsbRslml7FvKaNrlgUeJot++FkvYIhl1OkslVCofAtS35MPlBMhXgKWF9RNr9cwHanrPTUUXcYGag==}
+  '@biomejs/cli-darwin-x64@2.2.4':
+    resolution: {integrity: sha512-cFsdB4ePanVWfTnPVaUX+yr8qV8ifxjBKMkZwN7gKb20qXPxd/PmwqUH8mY5wnM9+U0QwM76CxFyBRJhC9tQwg==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [darwin]
 
-  '@biomejs/cli-linux-arm64-musl@2.2.2':
-    resolution: {integrity: sha512-/MhYg+Bd6renn6i1ylGFL5snYUn/Ct7zoGVKhxnro3bwekiZYE8Kl39BSb0MeuqM+72sThkQv4TnNubU9njQRw==}
+  '@biomejs/cli-linux-arm64-musl@2.2.4':
+    resolution: {integrity: sha512-7TNPkMQEWfjvJDaZRSkDCPT/2r5ESFPKx+TEev+I2BXDGIjfCZk2+b88FOhnJNHtksbOZv8ZWnxrA5gyTYhSsQ==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [linux]
 
-  '@biomejs/cli-linux-arm64@2.2.2':
-    resolution: {integrity: sha512-JfrK3gdmWWTh2J5tq/rcWCOsImVyzUnOS2fkjhiYKCQ+v8PqM+du5cfB7G1kXas+7KQeKSWALv18iQqdtIMvzw==}
+  '@biomejs/cli-linux-arm64@2.2.4':
+    resolution: {integrity: sha512-M/Iz48p4NAzMXOuH+tsn5BvG/Jb07KOMTdSVwJpicmhN309BeEyRyQX+n1XDF0JVSlu28+hiTQ2L4rZPvu7nMw==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [linux]
 
-  '@biomejs/cli-linux-x64-musl@2.2.2':
-    resolution: {integrity: sha512-ZCLXcZvjZKSiRY/cFANKg+z6Fhsf9MHOzj+NrDQcM+LbqYRT97LyCLWy2AS+W2vP+i89RyRM+kbGpUzbRTYWig==}
+  '@biomejs/cli-linux-x64-musl@2.2.4':
+    resolution: {integrity: sha512-m41nFDS0ksXK2gwXL6W6yZTYPMH0LughqbsxInSKetoH6morVj43szqKx79Iudkp8WRT5SxSh7qVb8KCUiewGg==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [linux]
 
-  '@biomejs/cli-linux-x64@2.2.2':
-    resolution: {integrity: sha512-Ogb+77edO5LEP/xbNicACOWVLt8mgC+E1wmpUakr+O4nKwLt9vXe74YNuT3T1dUBxC/SnrVmlzZFC7kQJEfquQ==}
+  '@biomejs/cli-linux-x64@2.2.4':
+    resolution: {integrity: sha512-orr3nnf2Dpb2ssl6aihQtvcKtLySLta4E2UcXdp7+RTa7mfJjBgIsbS0B9GC8gVu0hjOu021aU8b3/I1tn+pVQ==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [linux]
 
-  '@biomejs/cli-win32-arm64@2.2.2':
-    resolution: {integrity: sha512-wBe2wItayw1zvtXysmHJQoQqXlTzHSpQRyPpJKiNIR21HzH/CrZRDFic1C1jDdp+zAPtqhNExa0owKMbNwW9cQ==}
+  '@biomejs/cli-win32-arm64@2.2.4':
+    resolution: {integrity: sha512-NXnfTeKHDFUWfxAefa57DiGmu9VyKi0cDqFpdI+1hJWQjGJhJutHPX0b5m+eXvTKOaf+brU+P0JrQAZMb5yYaQ==}
     engines: {node: '>=14.21.3'}
     cpu: [arm64]
     os: [win32]
 
-  '@biomejs/cli-win32-x64@2.2.2':
-    resolution: {integrity: sha512-DAuHhHekGfiGb6lCcsT4UyxQmVwQiBCBUMwVra/dcOSs9q8OhfaZgey51MlekT3p8UwRqtXQfFuEJBhJNdLZwg==}
+  '@biomejs/cli-win32-x64@2.2.4':
+    resolution: {integrity: sha512-3Y4V4zVRarVh/B/eSHczR4LYoSVyv3Dfuvm3cWs5w/HScccS0+Wt/lHOcDTRYeHjQmMYVC3rIRWqyN2EI52+zg==}
     engines: {node: '>=14.21.3'}
     cpu: [x64]
     os: [win32]
@@ -257,38 +260,15 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@igor.dvlpr/chars-in-string@2.1.2':
-    resolution: {integrity: sha512-YmCLqNekqlwZtlcyW68pF4PQ3MIGX5t6wKA/FbF3Q/NT/PEXdF9QsbHxkunMmutN6h+L1pNlfbiwbj1N8mK1xg==}
-    engines: {node: '>=12.17'}
-    deprecated: ⚠️ This package has been deprecated due to technical difficulties. Please install @igorskyflyer/chars-in-string instead.
-
-  '@igor.dvlpr/recursive-readdir@2.1.5':
-    resolution: {integrity: sha512-WwL6XeQvLA7Y1kQCYurPSPFNHNvCd0HWt9N3mI4e7c2h43lxY3zRXaPw6agDafRI9f2ShWOPGkSpN4RmHcw79w==}
-    engines: {node: '>=12.17'}
-
-  '@igor.dvlpr/unc-path@2.1.2':
-    resolution: {integrity: sha512-sHHtAqCMdsZghiCyIqssixSKGwAFKyYsd6tua647/Qzl6JtDizdVRx4yTJheA5+NA/wL4rgL5UXPafCyXCNeZw==}
-    engines: {node: '>=12.17'}
-    deprecated: ⚠️ This package has been deprecated due to technical difficulties. Please install @igorskyflyer/unc-path instead.
-
-  '@igor.dvlpr/upath@2.1.2':
-    resolution: {integrity: sha512-29zp17FN2wsX8Nbo5Ls0JTjkmIWM1EMh4NHWZPgyjvmnVe2EcWImETxJG/KBMfiVnPYsP9jhdX5FO4iJ8KMwZw==}
-    engines: {node: '>=12.17'}
-    deprecated: ⚠️ This package has been deprecated due to technical difficulties. Please install @igorskyflyer/upath instead.
-
-  '@igor.dvlpr/valid-path@2.2.1':
-    resolution: {integrity: sha512-a3Pw3+nB14+neffz/pMiP8vW/pL7fgXUAvfbB9eFEDKJoREE1vUTFzUyg7EHM97Np8to3bFgRHimpVFd7uzlBw==}
-    engines: {node: '>=12.17'}
-
-  '@igor.dvlpr/windev@1.2.2':
-    resolution: {integrity: sha512-ATaFFHaYrUdx3NmSTFydaat+dQUtXn6dw92jfWGXj1sU3Wgh6glohBMpiUOqUV45nbhxXOFxokDnZvdjf4+lgw==}
-    deprecated: ⚠️ This package has been deprecated due to technical difficulties. Please install @igorskyflyer/windev instead.
-
   '@igorskyflyer/biome-config@2.1.0':
     resolution: {integrity: sha512-sZ7K8tOMWNRAmirw94SUlsFdKwPS9DLZk63Y2Eb3gD3QMOE1KVb7ANd7MZaF/A20PwmXz9lMI5BYlqcpV1x+fA==}
     engines: {node: '>=22.0'}
     peerDependencies:
       '@biomejs/biome': ^2.2.2
+
+  '@igorskyflyer/chars-in-string@3.0.0':
+    resolution: {integrity: sha512-rzBYYAOlJoyd/JRZVVMDDWTSY37YqRFgVlEB5LqnZbPlW6IWNceSH8GOqRBqNIH3iTKBDA6TgGT/BcVz3aMfYA==}
+    engines: {node: '>=22.0'}
 
   '@igorskyflyer/is-rootdir@2.2.0':
     resolution: {integrity: sha512-Ti87na2i71qc0q5w6PSeh/ZiZyS8oSM02y6Xqv3cxZjM9xv+kZFPJdqV5/PGHcp/i2f+YEuGFKZPahtnWOO1SQ==}
@@ -296,6 +276,10 @@ packages:
 
   '@igorskyflyer/pathexists@3.0.0':
     resolution: {integrity: sha512-Y3x6BipwYFzrBCd7KTxkpJSUV6DAeDoEwgE+VsusK0g8YrYJ/ZoeUBYfmHdfHTkRuJIxjKelpR3fjlAihU7pFA==}
+    engines: {node: '>=22.0'}
+
+  '@igorskyflyer/recursive-readdir@3.0.0':
+    resolution: {integrity: sha512-g52sPsHlTNziDY611n2B1Hv6J5+F76E4GPm/S79OpT3pGAiSaWZtdS/RI/JqJ5z6HZMLnd116hfCbncDU3UNNQ==}
     engines: {node: '>=22.0'}
 
   '@igorskyflyer/str-is-in@3.1.0':
@@ -310,8 +294,20 @@ packages:
     resolution: {integrity: sha512-Rw3WUCfIbMCGRVP/aPpu9LuajeC7F8zSX74pa39B+MlmQ34Yz8/s+l1ftnkkX39zeGnf42Bo3qkwJoQJHE1w4Q==}
     engines: {node: '>=22.0'}
 
+  '@igorskyflyer/valid-path@3.0.0':
+    resolution: {integrity: sha512-WSLRKnpqYHEPOLxx7/ybd5T07ojSvihVukgNyfL513h2nlXRV/fKx5HgXzkPXhxN8xoyA/a9kbFXU7R9481RJA==}
+    engines: {node: '>=22.0'}
+
+  '@igorskyflyer/windev@1.3.0':
+    resolution: {integrity: sha512-ELlFjkW9+cueBrGi8hqO8aVtjxLqka3Ewwvf99ztl+yjQ26KiJXV13j9bPdfBTBJO2ky0Ww9uUg2sgBXFzrReg==}
+    engines: {node: '>=22.0'}
+
   '@igorskyflyer/zep@6.1.0':
     resolution: {integrity: sha512-DFmr4VedoyPbbVsdtlZzEPlONYZF1mmK99Q1d+dkjn3BdpjoLe1z7rGFE5X/C1V9Olarok7zO0YxlGlASdZ57w==}
+    engines: {node: '>=22.0'}
+
+  '@igorskyflyer/zitto@1.0.0':
+    resolution: {integrity: sha512-2BE9eVlmYPzaLfomMujnvC3rfVA6X1gW6jTe9/5Oz7HPuYPl3kjZfwLwCBw6kYg5j9lOFKAEcIu/mrXSvXKSMg==}
     engines: {node: '>=22.0'}
 
   '@jridgewell/sourcemap-codec@1.5.5':
@@ -431,8 +427,8 @@ packages:
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
 
-  '@types/node@22.18.1':
-    resolution: {integrity: sha512-rzSDyhn4cYznVG+PCzGe1lwuMYJrcBS1fc3JqSa2PvtABwWo+dZ1ij5OVok3tqfpEBCBoaR4d7upFJk73HRJDw==}
+  '@types/node@22.18.6':
+    resolution: {integrity: sha512-r8uszLPpeIWbNKtvWRt/DbVi5zbqZyj1PTmhRMqBMvDnaz1QpmSKujUtJLrqGZeoM8v72MfYggDceY4K1itzWQ==}
 
   '@types/vscode@1.103.0':
     resolution: {integrity: sha512-o4hanZAQdNfsKecexq9L3eHICd0AAvdbLk6hA60UzGXbGH/q8b/9xv2RgR7vV3ZcHuyKVq7b37IGd/+gM4Tu+Q==}
@@ -690,39 +686,39 @@ packages:
 
 snapshots:
 
-  '@biomejs/biome@2.2.2':
+  '@biomejs/biome@2.2.4':
     optionalDependencies:
-      '@biomejs/cli-darwin-arm64': 2.2.2
-      '@biomejs/cli-darwin-x64': 2.2.2
-      '@biomejs/cli-linux-arm64': 2.2.2
-      '@biomejs/cli-linux-arm64-musl': 2.2.2
-      '@biomejs/cli-linux-x64': 2.2.2
-      '@biomejs/cli-linux-x64-musl': 2.2.2
-      '@biomejs/cli-win32-arm64': 2.2.2
-      '@biomejs/cli-win32-x64': 2.2.2
+      '@biomejs/cli-darwin-arm64': 2.2.4
+      '@biomejs/cli-darwin-x64': 2.2.4
+      '@biomejs/cli-linux-arm64': 2.2.4
+      '@biomejs/cli-linux-arm64-musl': 2.2.4
+      '@biomejs/cli-linux-x64': 2.2.4
+      '@biomejs/cli-linux-x64-musl': 2.2.4
+      '@biomejs/cli-win32-arm64': 2.2.4
+      '@biomejs/cli-win32-x64': 2.2.4
 
-  '@biomejs/cli-darwin-arm64@2.2.2':
+  '@biomejs/cli-darwin-arm64@2.2.4':
     optional: true
 
-  '@biomejs/cli-darwin-x64@2.2.2':
+  '@biomejs/cli-darwin-x64@2.2.4':
     optional: true
 
-  '@biomejs/cli-linux-arm64-musl@2.2.2':
+  '@biomejs/cli-linux-arm64-musl@2.2.4':
     optional: true
 
-  '@biomejs/cli-linux-arm64@2.2.2':
+  '@biomejs/cli-linux-arm64@2.2.4':
     optional: true
 
-  '@biomejs/cli-linux-x64-musl@2.2.2':
+  '@biomejs/cli-linux-x64-musl@2.2.4':
     optional: true
 
-  '@biomejs/cli-linux-x64@2.2.2':
+  '@biomejs/cli-linux-x64@2.2.4':
     optional: true
 
-  '@biomejs/cli-win32-arm64@2.2.2':
+  '@biomejs/cli-win32-arm64@2.2.4':
     optional: true
 
-  '@biomejs/cli-win32-x64@2.2.2':
+  '@biomejs/cli-win32-x64@2.2.4':
     optional: true
 
   '@esbuild/aix-ppc64@0.25.9':
@@ -803,29 +799,11 @@ snapshots:
   '@esbuild/win32-x64@0.25.9':
     optional: true
 
-  '@igor.dvlpr/chars-in-string@2.1.2': {}
-
-  '@igor.dvlpr/recursive-readdir@2.1.5':
+  '@igorskyflyer/biome-config@2.1.0(@biomejs/biome@2.2.4)':
     dependencies:
-      '@igor.dvlpr/upath': 2.1.2
+      '@biomejs/biome': 2.2.4
 
-  '@igor.dvlpr/unc-path@2.1.2': {}
-
-  '@igor.dvlpr/upath@2.1.2':
-    dependencies:
-      '@igor.dvlpr/unc-path': 2.1.2
-
-  '@igor.dvlpr/valid-path@2.2.1':
-    dependencies:
-      '@igor.dvlpr/chars-in-string': 2.1.2
-      '@igor.dvlpr/upath': 2.1.2
-      '@igor.dvlpr/windev': 1.2.2
-
-  '@igor.dvlpr/windev@1.2.2': {}
-
-  '@igorskyflyer/biome-config@2.1.0(@biomejs/biome@2.2.2)':
-    dependencies:
-      '@biomejs/biome': 2.2.2
+  '@igorskyflyer/chars-in-string@3.0.0': {}
 
   '@igorskyflyer/is-rootdir@2.2.0':
     dependencies:
@@ -835,6 +813,10 @@ snapshots:
     dependencies:
       '@igorskyflyer/str-is-in': 3.1.0
 
+  '@igorskyflyer/recursive-readdir@3.0.0':
+    dependencies:
+      '@igorskyflyer/upath': 3.1.0
+
   '@igorskyflyer/str-is-in@3.1.0': {}
 
   '@igorskyflyer/unc-path@3.1.0': {}
@@ -843,7 +825,17 @@ snapshots:
     dependencies:
       '@igorskyflyer/unc-path': 3.1.0
 
+  '@igorskyflyer/valid-path@3.0.0':
+    dependencies:
+      '@igorskyflyer/chars-in-string': 3.0.0
+      '@igorskyflyer/upath': 3.1.0
+      '@igorskyflyer/windev': 1.3.0
+
+  '@igorskyflyer/windev@1.3.0': {}
+
   '@igorskyflyer/zep@6.1.0': {}
+
+  '@igorskyflyer/zitto@1.0.0': {}
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
 
@@ -918,7 +910,7 @@ snapshots:
 
   '@types/estree@1.0.8': {}
 
-  '@types/node@22.18.1':
+  '@types/node@22.18.6':
     dependencies:
       undici-types: 6.21.0
 
@@ -932,13 +924,13 @@ snapshots:
       chai: 5.3.3
       tinyrainbow: 2.0.0
 
-  '@vitest/mocker@3.2.4(vite@7.1.4(@types/node@22.18.1))':
+  '@vitest/mocker@3.2.4(vite@7.1.4(@types/node@22.18.6))':
     dependencies:
       '@vitest/spy': 3.2.4
       estree-walker: 3.0.3
       magic-string: 0.30.18
     optionalDependencies:
-      vite: 7.1.4(@types/node@22.18.1)
+      vite: 7.1.4(@types/node@22.18.6)
 
   '@vitest/pretty-format@3.2.4':
     dependencies:
@@ -1114,13 +1106,13 @@ snapshots:
 
   undici-types@6.21.0: {}
 
-  vite-node@3.2.4(@types/node@22.18.1):
+  vite-node@3.2.4(@types/node@22.18.6):
     dependencies:
       cac: 6.7.14
       debug: 4.4.1
       es-module-lexer: 1.7.0
       pathe: 2.0.3
-      vite: 7.1.4(@types/node@22.18.1)
+      vite: 7.1.4(@types/node@22.18.6)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -1135,7 +1127,7 @@ snapshots:
       - tsx
       - yaml
 
-  vite@7.1.4(@types/node@22.18.1):
+  vite@7.1.4(@types/node@22.18.6):
     dependencies:
       esbuild: 0.25.9
       fdir: 6.5.0(picomatch@4.0.3)
@@ -1144,14 +1136,14 @@ snapshots:
       rollup: 4.50.0
       tinyglobby: 0.2.14
     optionalDependencies:
-      '@types/node': 22.18.1
+      '@types/node': 22.18.6
       fsevents: 2.3.3
 
-  vitest@3.2.4(@types/node@22.18.1):
+  vitest@3.2.4(@types/node@22.18.6):
     dependencies:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.4
-      '@vitest/mocker': 3.2.4(vite@7.1.4(@types/node@22.18.1))
+      '@vitest/mocker': 3.2.4(vite@7.1.4(@types/node@22.18.6))
       '@vitest/pretty-format': 3.2.4
       '@vitest/runner': 3.2.4
       '@vitest/snapshot': 3.2.4
@@ -1169,11 +1161,11 @@ snapshots:
       tinyglobby: 0.2.14
       tinypool: 1.1.1
       tinyrainbow: 2.0.0
-      vite: 7.1.4(@types/node@22.18.1)
-      vite-node: 3.2.4(@types/node@22.18.1)
+      vite: 7.1.4(@types/node@22.18.6)
+      vite-node: 3.2.4(@types/node@22.18.6)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 22.18.1
+      '@types/node': 22.18.6
     transitivePeerDependencies:
       - jiti
       - less
