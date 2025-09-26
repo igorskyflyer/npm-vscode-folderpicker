@@ -19,10 +19,16 @@ import type { ResponseSpeed } from '../types/ResponseSpeed.js'
  * @public
  */
 export interface IFolderPickerOptions {
-  /** Title text displayed at the top of the dialog. */
+  /** Title text displayed at the top of the dialog.
+  *
+  * Defaults to `'Pick a Folder'`.
+  */
   dialogTitle: string
 
-  /** Whether to show icons next to folder items. */
+  /** Whether to show icons next to folder items.
+  *
+  * Defaults to `true`.
+  */
   showIcons: boolean
 
   /** Whether to display a configuration (⚙️) button in the UI. */
