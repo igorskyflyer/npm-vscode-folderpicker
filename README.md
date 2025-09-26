@@ -115,7 +115,7 @@ _options_: `Partial<IFolderPickerOptions>` - Optional configuration to customize
 
 <br>
 
-Options object:
+**Options**
 
 ### `IFolderPickerOptions`
 
