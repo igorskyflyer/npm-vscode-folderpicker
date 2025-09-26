@@ -92,9 +92,7 @@ Used for controlling the response speed of the `InputBox` of the `QuickPick`. Si
 
 Available values are: `Instant`, `Fast`, `Normal` (**default**), `Lazy`.
 
-<br>
-
-> ### ℹ️ NOTE
+> ### 🛑 CAUTION
 >
 > #### Throttling
 >
