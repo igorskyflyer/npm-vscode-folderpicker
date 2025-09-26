@@ -88,11 +88,18 @@ npm i @igorskyflyer/vscode-folderpicker
 enum ResponseSpeed
 ```
 
-Used for controlling the response speed of the `InputBox` of the `QuickPick`. Since `v.2.0.0` callbacks for generating Actions are throttled/debounced when necessary and the picker now waits for the user to finish their input before generating available Actions for performance reasons. Throttling provided by [`Zep()`](https://www.npmjs.com/package/@igor.dvlpr/zep).
+Used for controlling the response speed of the `InputBox` of the `QuickPick`. Since `v.2.0.0` callbacks for generating Actions are throttled/debounced when necessary and the picker now waits for the user to finish their input before generating available Actions for performance reasons. Throttling is provided by [`Zep()`](https://www.npmjs.com/package/@igorskyflyer/zep).  
 
 Available values are: `Instant`, `Fast`, `Normal` (default), `Lazy`.
 
-Note: setting the property `responseSpeed` in the `options` parameter of `showFolderPicker()` to `Instant` will disable throttling!
+<br>
+
+> ### ℹ️ NOTE
+>
+> #### Throttling
+>
+> Setting this property to `Instant` will disable all throttling!
+>
 
 <br>
 
