@@ -96,7 +96,7 @@ Available values are: `Instant`, `Fast`, `Normal` (**default**), `Lazy`.
 >
 > #### Throttling
 >
-> Setting this property to `Instant` will disable all throttling!
+> Setting this property to `Instant` disables all throttling/debouncing!
 >
 
 <br>
@@ -136,7 +136,7 @@ See the [**Icons**] section below.
 
 - **`[autoNavigate]`**: **boolean** = **false** - Whether to auto navigate to a child folder when creating new child folders. Defaults to `false`.  
 
-- **`[responseSpeed]`**: **ResponseSpeed** = **ResponseSpeed.Normal** - Controls how quickly the picker responds to user input. Can be a predefined `ResponseSpeed` or a custom debounce interval in ms. See [ResponseSpeed](#folder-picker-responsespeed). Defaults to `ResponseSpeed.Normal`.  
+- **`[responseSpeed]`**: **ResponseSpeed | number** = **ResponseSpeed.Normal** - Controls how quickly the picker responds to user input. Can be a predefined `ResponseSpeed` or a custom debounce interval in ms. See [ResponseSpeed](#folder-picker-responsespeed). Defaults to `ResponseSpeed.Normal`.  
 
 - **`[ignoreFocusOut]`**: **boolean** = **false** - Whether the picker remains open when focus is lost. Defaults to `false`.  
 
@@ -144,17 +144,17 @@ See the [**Icons**] section below.
 
 #### Icons
 
-- **`[iconFolder]`**: **string** = '' - Icon used for folder entries.  
+- **`[iconFolder]`**: **LabelIcon (string | ThemeIcon)** = '' - Icon used for folder entries.  
 
-- **`[iconFolderUp]`**: **string** = '' - Icon used for the go up (parent folder) action.  
+- **`[iconFolderUp]`**: **LabelIcon (string | ThemeIcon)** = '' - Icon used for the go up (parent folder) action.  
 
-- **`[iconCreate]`**: **string** = '' - Icon used for the create new folder action.  
+- **`[iconCreate]`**: **LabelIcon (string | ThemeIcon)** = '' - Icon used for the create new folder action.  
 
-- **`[iconNavigate]`**: **string** = '' - Icon used for navigation actions.  
+- **`[iconNavigate]`**: **LabelIcon (string | ThemeIcon)** = '' - Icon used for navigation actions.  
 
-- **`[iconPick]`**: **string** = '' - Icon used for the pick action.  
+- **`[iconPick]`**: **LabelIcon (string | ThemeIcon)** = '' - Icon used for the pick action.  
 
-- **`[iconClear]`**: **string** = '' - Icon used for the clear action.  
+- **`[iconClear]`**: **LabelIcon (string | ThemeIcon)** = '' - Icon used for the clear action.  
 
 #### Behavior
 
@@ -185,64 +185,17 @@ See the [**Icons**] section below.
 ```ts
 // some magic code 🔮
 
-import { showFolderPicker } from 'vscode-folderpicker'
+import { showFolderPicker } from '@igorskyflyer/vscode-folderpicker'
 import { ThemeIcon } from 'vscode'
 
-function openFolderPicker() {
-  showFolderPicker('/Users/igorskyflyer/projects', {
-    dialogTitle: 'Select a Project Folder',
-    showIcons: true,
-    showConfigButton: true,
-    autoNavigate: false,
-    responseSpeed: 150, // custom debounce in ms
-    ignoreFocusOut: false,
-    canPick: true,
-
-    // custom icons (emoji or ThemeIcon)
-    iconFolder: '📂',
-    iconFolderUp: new ThemeIcon('arrow-up'),
-    iconCreate: new ThemeIcon('new-folder'),
-    iconNavigate: '➡️',
-    iconPick: '✅',
-    iconClear: '❌',
-
-    // lifecycle callbacks
-    onCreateFolder: (folderPath) => {
-      console.log('Created folder:', folderPath)
-    },
-    onPickFolder: (folderPath) => {
-      console.log('Picked folder:', folderPath)
-    },
-    onNavigateTo: (folderPath) => {
-      console.log('Navigated into:', folderPath)
-    },
-    onGoUp: (folderPath) => {
-      console.log('Went up to:', folderPath)
-    },
-    onFetch: () => {
-      console.log('Fetching folder contents…')
-    },
-    onFetched: () => {
-      console.log('Finished fetching folder contents')
-    },
-    onClose: () => {
-      console.log('Folder picker closed')
-    },
-    onConfigButton: () => {
-      console.log('Config button clicked')
-    },
-    onError: error => {
-      console.error('Error in folder picker:', error)
-    },
-    onUnspecifiedAction: (quickPick) => {
-      console.log('Unspecified action triggered', quickPick)
-    }
-  })
-}
+showFolderPicker('/Users/igor/projects', {
+  dialogTitle: 'Select a folder',
+  onPickFolder: folderPath => {
+    console.log('Picked folder:', folderPath)
+  }
+})
 
 // even more magic code ✨
-
-openFolderPicker()
 ```
 
 <br>
