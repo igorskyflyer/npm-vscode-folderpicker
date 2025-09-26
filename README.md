@@ -42,7 +42,7 @@
 
 ## 🎯 Motivation
 
-This module powers my **[New Folder](https://github.com/igorskyflyer/vscode-new-folder)** VS Code extension.  
+This module powers my [**New Folder**](https://github.com/igorskyflyer/vscode-new-folder) VS Code extension.  
 It is under active development - expect ***breaking*** changes.
 
 ### The goal
@@ -53,7 +53,7 @@ Provide a simple UI/UX for creating new folders when opening a new or blank VS C
 - Limited to creating a single‑level child folder - no nested/recursive folder creation.
 
 ### What happened upstream?
-- I filed a feature request [#127201](https://github.com/microsoft/vscode/issues/127201) with [@microsoft/vscode](https://github.com/microsoft/vscode).
+- I filed a feature request [**#127201**](https://github.com/microsoft/vscode/issues/127201) with [**@microsoft/vscode**](https://github.com/microsoft/vscode).
 - The request was closed as *by design*.
 
 ### The result
@@ -136,7 +136,7 @@ See the [**Icons**] section below.
 
 - **`[autoNavigate]`**: **boolean** = **false** - Whether to auto navigate to a child folder when creating new child folders. Defaults to `false`.  
 
-- **`[responseSpeed]`**: **ResponseSpeed | number** = **ResponseSpeed.Normal** - Controls how quickly the picker responds to user input. Can be a predefined `ResponseSpeed` or a custom debounce interval in ms. See [ResponseSpeed](#folder-picker-responsespeed). Defaults to `ResponseSpeed.Normal`.  
+- **`[responseSpeed]`**: **ResponseSpeed | number** = **ResponseSpeed.Normal** - Controls how quickly the picker responds to user input. Can be a predefined `ResponseSpeed` or a custom debounce interval in ms. See [**ResponseSpeed**](#folder-picker-responsespeed). Defaults to `ResponseSpeed.Normal`.  
 
 - **`[ignoreFocusOut]`**: **boolean** = **false** - Whether the picker remains open when focus is lost. Defaults to `false`.  
 
