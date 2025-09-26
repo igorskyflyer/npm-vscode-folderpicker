@@ -111,7 +111,9 @@ _directory_: `string` - Initial directory to display in the picker.
 
 _options_: `Partial<IFolderPickerOptions>` - Optional configuration to customize behavior and UI.  
 
-Options:
+<br>
+
+Options object:
 
 ### `IFolderPickerOptions`
 
