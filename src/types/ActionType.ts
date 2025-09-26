@@ -1,7 +1,7 @@
 // Author: Igor Dimitrijević (@igorskyflyer)
 
 export enum ActionType {
-  Unspecified = -2,
+  Unknown = -2,
   Close = -1,
   Navigate = 0,
   CreateFolder = 1,
