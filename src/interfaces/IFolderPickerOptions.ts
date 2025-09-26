@@ -28,7 +28,7 @@ export interface IFolderPickerOptions {
   /** Whether to display a configuration (⚙️) button in the UI. */
   showConfigButton: boolean
 
-  /** Automatically navigate into the first folder when opened. */
+  /** Whether to auto navigate to a child folder when creating new child folders. */
   autoNavigate: boolean
 
   /**
@@ -37,28 +37,28 @@ export interface IFolderPickerOptions {
    */
   responseSpeed: ResponseSpeed | number
 
-  /** If true, the picker remains open when focus is lost. */
+  /** Whether the picker remains open when focus is lost. */
   ignoreFocusOut: boolean
 
-  /** Whether folder items can be picked/selected directly. */
+  /** Whether to enable picking of current folder in the Picker. */
   canPick: boolean
 
-  /** Icon used for regular folders. */
+  /** Icon used for folder entries. */
   iconFolder: LabelIcon
 
-  /** Icon used for the "go up" (parent folder) action. */
+  /** Icon used for the go up (parent folder) action. */
   iconFolderUp: LabelIcon
 
-  /** Icon used for the "create new folder" action. */
+  /** Icon used for the create new folder action. */
   iconCreate: LabelIcon
 
   /** Icon used for navigation actions. */
   iconNavigate: LabelIcon
 
-  /** Icon used for the "pick/confirm" action. */
+  /** Icon used for the pick action. */
   iconPick: LabelIcon
 
-  /** Icon used for the "clear/reset" action. */
+  /** Icon used for the clear action. */
   iconClear: LabelIcon
 
   /** Callback fired when a new folder is created. */
@@ -85,7 +85,9 @@ export interface IFolderPickerOptions {
   /** Callback fired when the configuration button is pressed. */
   onConfigButton?: ActionCallback
 
-  /** Callback fired when an error occurs. Always receives an `Error` instance. */
+  /** Callback fired when an error occurs.
+   *
+   * Always receives an `Error` instance. */
   onError?: ErrorCallback
 
   /**
